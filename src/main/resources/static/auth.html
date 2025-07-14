@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#1c1c1c] text-white min-h-screen flex items-center justify-center px-4">
+
+<div class="bg-[#0a0a0a] rounded-xl shadow-2xl flex flex-col md:flex-row overflow-hidden w-full max-w-4xl">
+
+  <!-- Left Panel -->
+  <div class="hidden md:flex flex-col justify-center items-center w-1/2 bg-[#0a0a0a] text-[#FFD700] p-10">
+    <h2 class="text-4xl font-bold mb-4">Welcome to WheelsHub</h2>
+    <p class="text-lg mb-8 text-center">Join the elite experience of luxury car ownership</p>
+    <img src="photos/wheelshub logo no bg.png" alt="Logo" class="w-40 h-40 object-contain">
+  </div>
+
+  <!-- Right Panel (Form) -->
+  <div class="w-full md:w-1/2 p-8 md:p-12 bg-[#0f0f0f]">
+
+    <!-- Toggle Tabs -->
+    <div class="flex justify-between items-center mb-6 border-b border-gray-700 pb-2">
+      <button id="showLogin" class="text-[#FFD700] font-bold border-b-2 border-[#FFD700] pb-1">Login</button>
+      <button id="showSignup" class="text-gray-400 hover:text-[#FFD700] font-semibold">Sign Up</button>
+    </div>
+
+    <!-- Message Display Area -->
+    <div id="message" class="mb-4 text-center text-sm font-medium hidden"></div>
+
+    <!-- Login Form -->
+    <form id="loginForm">
+      <div class="mb-4">
+        <label for="loginEmail" class="text-sm mb-1 block">Email</label>
+        <div class="flex items-center bg-[#1a1a1a] rounded border border-gray-700 px-3">
+          <i class="ph ph-envelope text-[#FFD700] mr-2"></i>
+          <input type="email" id="loginEmail" name="email" class="w-full bg-transparent py-2 outline-none text-white" placeholder="Enter email" required />
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="loginPassword" class="text-sm mb-1 block">Password</label>
+        <div class="flex items-center bg-[#1a1a1a] rounded border border-gray-700 px-3">
+          <i class="ph ph-lock text-[#FFD700] mr-2"></i>
+          <input type="password" id="loginPassword" name="password" class="w-full bg-transparent py-2 outline-none text-white" placeholder="Enter password" required />
+        </div>
+      </div>
+      <button type="submit" class="bg-[#FFD700] text-[#0a0a0a] font-semibold w-full py-2 rounded hover:bg-yellow-500 transition">Login</button>
+    </form>
+
+    <!-- Signup Form -->
+    <form id="signupForm" class="hidden">
+      <div class="mb-4">
+        <label for="signupFullName" class="text-sm mb-1 block">Full Name</label>
+        <div class="flex items-center bg-[#1a1a1a] rounded border border-gray-700 px-3">
+          <i class="ph ph-user text-[#FFD700] mr-2"></i>
+          <input type="text" id="signupFullName" name="fullName" class="w-full bg-transparent py-2 outline-none text-white" placeholder="Your name" required />
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="signupEmail" class="text-sm mb-1 block">Email</label>
+        <div class="flex items-center bg-[#1a1a1a] rounded border border-gray-700 px-3">
+          <i class="ph ph-envelope text-[#FFD700] mr-2"></i>
+          <input type="email" id="signupEmail" name="email" class="w-full bg-transparent py-2 outline-none text-white" placeholder="Email address" required />
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="signupPassword" class="text-sm mb-1 block">Password</label>
+        <div class="flex items-center bg-[#1a1a1a] rounded border border-gray-700 px-3">
+          <i class="ph ph-lock text-[#FFD700] mr-2"></i>
+          <input type="password" id="signupPassword" name="password" class="w-full bg-transparent py-2 outline-none text-white" placeholder="Create password" required />
+        </div>
+      </div>
+      <button type="submit" class="bg-[#FFD700] text-[#0a0a0a] font-semibold w-full py-2 rounded hover:bg-yellow-500 transition">Sign Up</button>
+    </form>
+
+  </div>
+</div>
+
+<script>
+  const showLoginBtn = document.getElementById('showLogin');
+  const showSignupBtn = document.getElementById('showSignup');
+  const loginForm = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+  const messageDiv = document.getElementById('message');
+
+  const loginEmailInput = document.getElementById('loginEmail');
+  const loginPasswordInput = document.getElementById('loginPassword');
+  const signupFullNameInput = document.getElementById('signupFullName');
+  const signupEmailInput = document.getElementById('signupEmail');
+  const signupPasswordInput = document.getElementById('signupPassword');
+
+  function showMessage(text, isError = false) {
+    messageDiv.textContent = text;
+    messageDiv.classList.remove('hidden', 'text-green-500', 'text-red-500');
+    if (isError) {
+      messageDiv.classList.add('text-red-500');
+    } else {
+      messageDiv.classList.add('text-green-500');
+    }
+  }
+
+  showLoginBtn.addEventListener('click', () => {
+    loginForm.classList.remove('hidden');
+    signupForm.classList.add('hidden');
+    showLoginBtn.classList.add('text-[#FFD700]', 'border-b-2', 'border-[#FFD700]');
+    showSignupBtn.classList.remove('text-[#FFD700]', 'border-b-2', 'border-[#FFD700]');
+    showSignupBtn.classList.add('text-gray-400');
+    messageDiv.classList.add('hidden'); // Hide message on tab switch
+  });
+
+  showSignupBtn.addEventListener('click', () => {
+    signupForm.classList.remove('hidden');
+    loginForm.classList.add('hidden');
+    showSignupBtn.classList.add('text-[#FFD700]', 'border-b-2', 'border-[#FFD700]');
+    showLoginBtn.classList.remove('text-[#FFD700]', 'border-b-2', 'border-[#FFD700]');
+    showLoginBtn.classList.add('text-gray-400');
+    messageDiv.classList.add('hidden'); // Hide message on tab switch
+  });
+
+  // Handle Login Form Submission
+  loginForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    messageDiv.classList.add('hidden'); // Hide previous messages
+
+    const email = loginEmailInput.value;
+    const password = loginPasswordInput.value;
+
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text(); // Or response.json() if backend sends JSON errors
+        throw new Error(errorText || 'Login failed');
+      }
+
+      const data = await response.json();
+
+      // Store JWT and user info in localStorage
+      localStorage.setItem('jwtToken', data.token);
+      localStorage.setItem('userName', data.fullName);
+      localStorage.setItem('userEmail', data.email);
+      localStorage.setItem('userRoles', JSON.stringify(data.roles)); // Store roles as JSON string
+
+      showMessage('Login successful! Redirecting...', false);
+      window.location.href = '/dashboard.html'; // Redirect to dashboard
+    } catch (error) {
+      console.error('Login error:', error);
+      showMessage(`Error: ${error.message}`, true);
+    }
+  });
+
+  // Handle Signup Form Submission
+  signupForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    messageDiv.classList.add('hidden'); // Hide previous messages
+
+    const fullName = signupFullNameInput.value;
+    const email = signupEmailInput.value;
+    const password = signupPasswordInput.value;
+    const roles = ["user"]; // Default role for new signups
+
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fullName, email, password, roles }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text(); // Backend sends a string error message
+        throw new Error(errorText || 'Signup failed');
+      }
+
+      const result = await response.text(); // Backend sends a string success message
+      showMessage(result, false);
+      signupForm.reset(); // Clear form on successful signup
+      showLoginBtn.click(); // Switch to login tab
+    } catch (error) {
+      console.error('Signup error:', error);
+      showMessage(`Error: ${error.message}`, true);
+    }
+  });
+</script>
+
+</body>
+</html>

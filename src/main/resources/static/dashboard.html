@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WheelsHub Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#1c1c1c] text-white min-h-screen px-4 py-8">
+
+  <div class="max-w-4xl mx-auto bg-[#0a0a0a] p-8 rounded-xl shadow-2xl">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold text-[#FFD700]">Welcome to WheelsHub, <span id="userName">User</span>!</h1>
+      <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Logout</button>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-xl font-semibold text-white mb-4">Your Dashboard</h2>
+      <div class="bg-[#1a1a1a] p-6 rounded border border-gray-700">
+        <p class="text-gray-300 mb-2">🚗 <strong>Test Drive Status:</strong> (Coming Soon)</p>
+        <p class="text-gray-300">📦 <strong>Order Status:</strong> (Coming Soon)</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Check JWT token
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+      alert("You must log in first.");
+      window.location.href = "/auth.html";
+    }
+
+    // Optionally decode token and get username (requires a JWT decoder if needed)
+    const email = localStorage.getItem('userEmail'); // store during login if needed
+    const fullName = localStorage.getItem('userName'); // store during login if needed
+    if (fullName) {
+      document.getElementById('userName').innerText = fullName;
+    }
+
+    // Logout function
+    function logout() {
+      localStorage.removeItem('jwtToken');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userEmail');
+      window.location.href = "/auth.html";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WheelsHub</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2a4b8d',secondary:'#1a1a1a',matteBg:'#1e3a6d',matteBlack:'#121212'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Montserrat', sans-serif;
+scroll-behavior: smooth;
+}
+.car-card:hover .car-info {
+opacity: 1;
+transform: translateY(0);
+}
+.car-info {
+opacity: 0;
+transform: translateY(10px);
+transition: all 0.3s ease;
+}
+.horizontal-scroll {
+scrollbar-width: none;
+}
+.horizontal-scroll::-webkit-scrollbar {
+display: none;
+}
+.date-picker, .time-picker, select {
+appearance: none;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%232a4b8d'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+background-repeat: no-repeat;
+background-position: right 0.5rem center;
+background-size: 1.5em 1.5em;
+padding-right: 2.5rem;
+}
+input[type="checkbox"] {
+appearance: none;
+width: 1.25rem;
+height: 1.25rem;
+border: 2px solid #2a4b8d;
+border-radius: 4px;
+position: relative;
+}
+input[type="checkbox"]:checked {
+background-color: #2a4b8d;
+}
+input[type="checkbox"]:checked::after {
+content: "";
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 0.75rem;
+height: 0.75rem;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+background-size: contain;
+background-repeat: no-repeat;
+}
+</style>
+</head>
+<body class="bg-white">
+<!-- Header -->
+<header class="bg-[#101010] shadow-md fixed w-full z-50">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center">
+      <h1 class="text-[#FFD700] text-2xl font-['Oswald'] font-bold">WheelsHub</h1>
+    </div>
+    <nav class="hidden md:flex space-x-8">
+      <a href="#" class="text-[#FFD700] hover:text-yellow-300 font-medium transition">Home</a>
+      <a href="brands.html" class="text-[#FFD700] hover:text-yellow-300 font-medium transition">Brands</a>
+      <a href="Test_drive.html" class="text-[#FFD700] hover:text-yellow-300 font-medium transition">Test Drive</a>
+      <a href="about.html" class="text-[#FFD700] hover:text-yellow-300 font-medium transition">About</a>
+    </nav>
+    <div class="flex items-center space-x-6">
+      <div id="search-trigger" class="w-10 h-10 flex items-center justify-center text-[#FFD700] cursor-pointer">
+        <i class="ri-search-line ri-lg"></i>
+      </div>
+
+      <div id="search-dialog" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden">
+        <div class="container mx-auto px-6 h-full flex items-start justify-center pt-[10vh]">
+          <div class="w-full max-w-3xl bg-[#1A1A1A] rounded-lg shadow-xl">
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-semibold text-[#FFD700]">Search</h3>
+                <button id="search-close" class="w-8 h-8 flex items-center justify-center text-[#FFD700] hover:text-yellow-300 transition">
+                  <i class="ri-close-line ri-lg"></i>
+                </button>
+              </div>
+              <div class="relative mb-6">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#FFD700]">
+                  <i class="ri-search-line ri-lg"></i>
+                </div>
+                <input type="text" id="search-input" class="w-full pl-12 pr-4 py-3 text-[#FFD700] bg-[#2A2A2A] rounded focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-gray-400" placeholder="Search for vehicles, brands, or features...">
+              </div>
+              <div class="flex gap-2 mb-6">
+                <button class="search-filter px-4 py-2 text-sm font-medium rounded-full bg-[#333] text-[#FFD700]">Vehicles</button>
+                <button class="search-filter px-4 py-2 text-sm font-medium rounded-full bg-[#2A2A2A] text-[#FFD700] hover:bg-[#333] hover:text-yellow-300 transition">Brands</button>
+                <button class="search-filter px-4 py-2 text-sm font-medium rounded-full bg-[#2A2A2A] text-[#FFD700] hover:bg-[#333] hover:text-yellow-300 transition">Features</button>
+              </div>
+              <div id="search-suggestions" class="hidden">
+                <h4 class="text-sm font-medium text-[#FFD700] mb-3">Suggestions</h4>
+                <div class="space-y-2">
+                  <a href="#" class="flex items-center gap-4 p-3 rounded hover:bg-[#2A2A2A] transition">
+                    <div class="w-12 h-12 flex items-center justify-center bg-[#333] rounded text-[#FFD700]">
+                      <i class="ri-car-line ri-lg"></i>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-[#FFD700]">Porsche 911 Turbo S</h5>
+                      <p class="text-sm text-gray-400">High-performance Sports Car</p>
+                    </div>
+                  </a>
+                  <a href="#" class="flex items-center gap-4 p-3 rounded hover:bg-[#2A2A2A] transition">
+                    <div class="w-12 h-12 flex items-center justify-center bg-[#333] rounded text-[#FFD700]">
+                      <i class="ri-car-line ri-lg"></i>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-[#FFD700]">Audi RS e-tron GT</h5>
+                      <p class="text-sm text-gray-400">Electric Performance Sedan</p>
+                    </div>
+                  </a>
+                  <a href="#" class="flex items-center gap-4 p-3 rounded hover:bg-[#2A2A2A] transition">
+                    <div class="w-12 h-12 flex items-center justify-center bg-[#333] rounded text-[#FFD700]">
+                      <i class="ri-steering-2-line ri-lg"></i>
+                    </div>
+                    <div>
+                      <h5 class="font-medium text-[#FFD700]">Porsche</h5>
+                      <p class="text-sm text-gray-400">Luxury Sports Car Brand</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div id="search-empty" class="py-8 text-center hidden">
+                <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[#333] rounded-full text-[#FFD700]">
+                  <i class="ri-search-line ri-2x"></i>
+                </div>
+                <p class="text-[#FFD700]">No results found</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="auth.html" target="_blank" title="Login / Sign Up">
+        <div class="w-10 h-10 flex items-center justify-center text-[#FFD700] cursor-pointer">
+        <i class="ri-user-line ri-lg"></i>
+        </div>
+      </a>
+
+      <button class="md:hidden w-10 h-10 flex items-center justify-center text-[#FFD700]">
+        <i class="ri-menu-line ri-lg"></i>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- Hero Banner -->
+<section class="relative h-screen" style="background-image: url('/photos/Rolls-Royce20Badge20Series20\(1\).jpg'); background-size: cover; background-position: center;">
+  <div class="absolute inset-0 bg-gradient-to-r from-secondary/80 to-transparent"></div>
+<div class="container mx-auto px-6 h-full flex items-center relative z-10">
+<div class="w-full md:w-1/2 text-white">
+<h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-[#E5C100]">
+  Experience Automotive Excellence
+</h2>
+<p class="text-lg md:text-xl mb-8 max-w-lg text-white">
+  Discover the pinnacle of luxury, performance, and innovation with our curated collection of premium vehicles.
+</p>
+<div class="flex flex-col sm:flex-row gap-4">
+
+<a href="brands.html"
+   data-readdy="true"
+   class="bg-[#0a0a0a] hover:bg-[#1a1a1a] text-[#FFD700] px-8 py-3 font-medium !rounded-button whitespace-nowrap transition text-center">
+   Explore Collection
+</a>
+<a href="Test_drive.html" target="_blank">
+  <button class="bg-[#0a0a0a] hover:bg-[#1a1a1a] text-[#FFD700] px-8 py-3 font-medium !rounded-button whitespace-nowrap transition">
+    Schedule Test Drive
+  </button>
+</a>
+
+</div>
+</div>
+</div>
+</section>
+
+
+<!-- Brand Collections -->
+<section id="collections" class="py-20 bg-[#0a0a0a]">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#FFD700] mb-4">Premium Collections</h2>
+      <p class="text-gray-300 max-w-2xl mx-auto">Explore our exclusive selection of luxury vehicles from the world's most prestigious automotive manufacturers.</p>
+    </div>
+    <div class="flex justify-between items-center mb-8">
+      <h3 class="text-2xl font-bold text-[#FFD700]">Featured Brands</h3>
+      <div class="flex gap-3">
+        <button id="scroll-left" class="w-10 h-10 flex items-center justify-center bg-[#0a0a0a] border border-[#FFD700] shadow-md rounded-full text-[#FFD700] hover:bg-[#FFD700] hover:text-black transition">
+          <i class="ri-arrow-left-s-line ri-lg"></i>
+        </button>
+        <button id="scroll-right" class="w-10 h-10 flex items-center justify-center bg-[#0a0a0a] border border-[#FFD700] shadow-md rounded-full text-[#FFD700] hover:bg-[#FFD700] hover:text-black transition">
+          <i class="ri-arrow-right-s-line ri-lg"></i>
+        </button>
+      </div>
+    </div>
+    <div class="relative overflow-hidden">
+      <div id="brands-container" class="horizontal-scroll flex space-x-6 overflow-x-auto py-4">
+
+      <!-- Card 1 -->
+      <a href="porsche/porsche.html" target="_blank" class="min-w-[200px]">
+      <div class="bg-[#1a1a1a] rounded-lg shadow-md overflow-hidden flex flex-col items-center p-6 cursor-pointer hover:shadow-lg transition">
+        <div class="w-16 h-16 flex items-center justify-center mb-4">
+        <img src="logos/porsche.png" alt="Porsche" class="w-full h-full object-contain">
+        </div>
+        <h4 class="text-lg font-semibold text-white">Porsche</h4>
+        <p class="text-sm text-gray-400 mt-2">12 Models</p>
+      </div>
+      </a>
+
+      <!-- Rolls Royce -->
+      <a href="rolls royce/rolls_royce.html" target="_blank" class="min-w-[200px]">
+        <div class="bg-[#1a1a1a] rounded-lg shadow-md overflow-hidden flex flex-col items-center p-6 cursor-pointer hover:shadow-lg transition">
+          <div class="w-16 h-16 flex items-center justify-center mb-4">
+            <img src="logos/rolls royce.png" alt="Rolls Royce" class="w-full h-full object-contain">
+          </div>
+          <h4 class="text-lg font-semibold text-white">Rolls Royce</h4>
+          <p class="text-sm text-gray-400 mt-2">10 Models</p>
+        </div>
+      </a>
+
+      <!-- Audi -->
+      <a href="audi/audi.html" target="_blank" class="min-w-[200px]">
+        <div class="bg-[#1a1a1a] rounded-lg shadow-md overflow-hidden flex flex-col items-center p-6 cursor-pointer hover:shadow-lg transition">
+          <div class="w-16 h-16 flex items-center justify-center mb-4">
+            <img src="logos/audi.png" alt="Audi" class="w-full h-full object-contain">
+          </div>
+          <h4 class="text-lg font-semibold text-white">Audi</h4>
+          <p class="text-sm text-gray-400 mt-2">15 Models</p>
+        </div>
+      </a>
+
+      <!-- BMW -->
+      <a href="bmw/bmw.html" target="_blank" class="min-w-[200px]">
+        <div class="bg-[#1a1a1a] rounded-lg shadow-md overflow-hidden flex flex-col items-center p-6 cursor-pointer hover:shadow-lg transition">
+          <div class="w-16 h-16 flex items-center justify-center mb-4">
+            <img src="logos/bmw.png" alt="BMW" class="w-full h-full object-contain">
+          </div>
+          <h4 class="text-lg font-semibold text-white">BMW</h4>
+          <p class="text-sm text-gray-400 mt-2">18 Models</p>
+        </div>
+      </a>
+
+      <!-- Mercedes-Benz -->
+      <a href="mercedes/mercedes.html" target="_blank" class="min-w-[200px]">
+        <div class="bg-[#1a1a1a] rounded-lg shadow-md overflow-hidden flex flex-col items-center p-6 cursor-pointer hover:shadow-lg transition">
+          <div class="w-16 h-16 flex items-center justify-center mb-4">
+            <img src="logos/mercedes.png" alt="Mercedes-Benz" class="w-full h-full object-contain">
+          </div>
+          <h4 class="text-lg font-semibold text-white">Mercedes-Benz</h4>
+          <p class="text-sm text-gray-400 mt-2">20 Models</p>
+        </div>
+      </a>
+
+      <!-- Lamborghini -->
+      <a href="lamborghini/lamborghini.html" target="_blank" class="min-w-[200px]">
+        <div class="bg-[#1a1a1a] rounded-lg shadow-md overflow-hidden flex flex-col items-center p-6 cursor-pointer hover:shadow-lg transition">
+          <div class="w-16 h-16 flex items-center justify-center mb-4">
+            <img src="logos/lamborgini.png" alt="Lamborghini" class="w-full h-full object-contain">
+          </div>
+          <h4 class="text-lg font-semibold text-white">Lamborghini</h4>
+          <p class="text-sm text-gray-400 mt-2">6 Models</p>
+        </div>
+      </a>
+
+
+      <!-- Ferrari -->
+      <a href="ferrari/ferrari.html" target="_blank" class="min-w-[200px]">
+        <div class="bg-[#1a1a1a] rounded-lg shadow-md overflow-hidden flex flex-col items-center p-6 cursor-pointer hover:shadow-lg transition">
+          <div class="w-16 h-16 flex items-center justify-center mb-4">
+            <img src="logos/ferrari.png" alt="Ferrari" class="w-full h-full object-contain">
+          </div>
+          <h4 class="text-lg font-semibold text-white">Ferrari</h4>
+          <p class="text-sm text-gray-400 mt-2">8 Models</p>
+        </div>
+      </a>
+
+      <!-- Bentley -->
+      <a href="bentley/bentley.html" target="_blank" class="min-w-[200px]">
+        <div class="bg-[#1a1a1a] rounded-lg shadow-md overflow-hidden flex flex-col items-center p-6 cursor-pointer hover:shadow-lg transition">
+          <div class="w-16 h-16 flex items-center justify-center mb-4">
+            <img src="logos/bentley.png" alt="Bentley" class="w-full h-full object-contain">
+          </div>
+          <h4 class="text-lg font-semibold text-white">Bentley</h4>
+          <p class="text-sm text-gray-400 mt-2">5 Models</p>
+        </div>
+      </a>
+
+      <!-- Aston Martin -->
+      <a href="aston martin/astonmartin.html" target="_blank" class="min-w-[200px]">
+        <div class="bg-[#1a1a1a] rounded-lg shadow-md overflow-hidden flex flex-col items-center p-6 cursor-pointer hover:shadow-lg transition">
+          <div class="w-16 h-16 flex items-center justify-center mb-4">
+            <img src="logos/aston martin.png" alt="Aston Martin" class="w-full h-full object-contain">
+          </div>
+          <h4 class="text-lg font-semibold text-white">Aston Martin</h4>
+          <p class="text-sm text-gray-400 mt-2">7 Models</p>
+        </div>
+      </a>
+
+      <!-- McLaren -->
+      <a href="mclaren/mclaren.html" target="_blank" class="min-w-[200px]">
+        <div class="bg-[#1a1a1a] rounded-lg shadow-md overflow-hidden flex flex-col items-center p-6 cursor-pointer hover:shadow-lg transition">
+          <div class="w-16 h-16 flex items-center justify-center mb-4">
+            <img src="logos/mclaren.png" alt="McLaren" class="w-full h-full object-contain">
+          </div>
+          <h4 class="text-lg font-semibold text-white">McLaren</h4>
+          <p class="text-sm text-gray-400 mt-2">9 Models</p>
+        </div>
+      </a>
+      </div>
+    </div>
+  </div>
+
+<!-- Featured Vehicles -->
+<section class="py-20 bg-[#101010]">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-[#FFD700] mb-4">Featured Vehicles</h2>
+      <p class="text-gray-300 max-w-2xl mx-auto">Explore our handpicked selection of premium vehicles, each representing the pinnacle of automotive engineering and luxury.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Vehicle Card 1 -->
+      <div class="bg-[#101010] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+      <div class="relative">
+      <img src="rolls royce/Rolls Royces/ghost.webp" alt="Rolls-Royce Ghost" class="w-full h-64 object-cover object-center">
+
+    <!-- Gradient with lower opacity -->
+    <div class="absolute inset-0 bg-gradient-to-t from-[#FFD700]/50 to-transparent p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end">
+      <h4 class="text-xl font-bold">Rolls-Royce Ghost</h4>
+      <p class="text-sm opacity-90">Timeless elegance with modern luxury</p>
+    </div>
+  </div>
+  <div class="p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-bold text-[#FFD700]">Rolls-Royce Ghost</h3>
+      <span class="text-white font-semibold">$343,000</span>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mb-6 text-white">
+      <div class="flex items-center gap-2"><i class="ri-dashboard-3-line"></i><span class="text-sm">563 HP</span></div>
+      <div class="flex items-center gap-2"><i class="ri-speed-up-line"></i><span class="text-sm">0-60 in 4.6s</span></div>
+      <div class="flex items-center gap-2"><i class="ri-settings-5-line"></i><span class="text-sm">8-Speed Auto</span></div>
+      <div class="flex items-center gap-2"><i class="ri-roadster-line"></i><span class="text-sm">AWD</span></div>
+    </div>
+    <div class="flex gap-3">
+      <button class="flex-1 bg-[#FFD700] hover:bg-[#e6c200] text-[#101010] px-4 py-2 text-sm font-medium rounded transition">Learn More</button>
+      <button class="flex-1 border border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700]/10 px-4 py-2 text-sm font-medium rounded transition">Test Drive</button>
+    </div>
+  </div>
+</div>
+
+<!-- Vehicle Card 2 -->
+<div class="bg-[#101010] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+  <div class="relative">
+    <img src="ferrari/Ferraris/812.jpg" alt="Ferrari 812 Superfast" class="w-full h-64 object-cover object-center">
+    <div class="absolute inset-0 bg-gradient-to-t from-[#FFD700]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+      <h4 class="text-xl font-bold">Ferrari 812</h4>
+      <p class="text-sm opacity-90">Blistering performance in iconic red</p>
+    </div>
+  </div>
+  <div class="p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-bold text-[#FFD700]">Ferrari 812</h3>
+      <span class="text-white font-semibold">$404,494</span>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mb-6 text-white">
+      <div class="flex items-center gap-2"><i class="ri-dashboard-3-line"></i><span class="text-sm">789 HP</span></div>
+      <div class="flex items-center gap-2"><i class="ri-speed-up-line"></i><span class="text-sm">0-60 in 2.8s</span></div>
+      <div class="flex items-center gap-2"><i class="ri-settings-5-line"></i><span class="text-sm">7-Speed DCT</span></div>
+      <div class="flex items-center gap-2"><i class="ri-roadster-line"></i><span class="text-sm">RWD</span></div>
+    </div>
+    <div class="flex gap-3">
+      <button class="flex-1 bg-[#FFD700] hover:bg-[#e6c200] text-[#101010] px-4 py-2 text-sm font-medium rounded transition">Learn More</button>
+      <button class="flex-1 border border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700]/10 px-4 py-2 text-sm font-medium rounded transition">Test Drive</button>
+    </div>
+  </div>
+</div>
+
+<!-- Vehicle Card 3 -->
+<div class="bg-[#101010] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+  <div class="relative">
+    <img src="bmw/BMWs/m5.webp" alt="BMW M5 Competition" class="w-full h-64 object-cover object-center">
+    <div class="absolute inset-0 bg-gradient-to-t from-[#FFD700]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+      <h4 class="text-xl font-bold">BMW M5</h4>
+      <p class="text-sm opacity-90">Luxury and high-performance combined</p>
+    </div>
+  </div>
+  <div class="p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-bold text-[#FFD700]">BMW M5</h3>
+      <span class="text-white font-semibold">$111,100</span>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mb-6 text-white">
+      <div class="flex items-center gap-2"><i class="ri-dashboard-3-line"></i><span class="text-sm">617 HP</span></div>
+      <div class="flex items-center gap-2"><i class="ri-speed-up-line"></i><span class="text-sm">0-60 in 3.1s</span></div>
+      <div class="flex items-center gap-2"><i class="ri-settings-5-line"></i><span class="text-sm">8-Speed Auto</span></div>
+      <div class="flex items-center gap-2"><i class="ri-roadster-line"></i><span class="text-sm">AWD</span></div>
+    </div>
+    <div class="flex gap-3">
+      <button class="flex-1 bg-[#FFD700] hover:bg-[#e6c200] text-[#101010] px-4 py-2 text-sm font-medium rounded transition">Learn More</button>
+      <button class="flex-1 border border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700]/10 px-4 py-2 text-sm font-medium rounded transition">Test Drive</button>
+    </div>
+  </div>
+</div>
+
+<!-- Vehicle Card 4 -->
+<div class="bg-[#101010] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+  <div class="relative">
+    <img src="mercedes/Mercs/amg gt.webp" alt="Mercedes-AMG GT 2023" class="w-full h-64 object-cover object-center">
+    <div class="absolute inset-0 bg-gradient-to-t from-[#FFD700]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+      <h4 class="text-xl font-bold">Mercedes-AMG GT 2023</h4>
+      <p class="text-sm opacity-90">A thrilling blend of elegance and power</p>
+    </div>
+  </div>
+  <div class="p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-bold text-[#FFD700]">Mercedes-AMG GT 2023</h3>
+      <span class="text-white font-semibold">$174,350</span>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mb-6 text-white">
+      <div class="flex items-center gap-2"><i class="ri-dashboard-3-line"></i><span class="text-sm">577 HP</span></div>
+      <div class="flex items-center gap-2"><i class="ri-speed-up-line"></i><span class="text-sm">0-60 in 3.3s</span></div>
+      <div class="flex items-center gap-2"><i class="ri-settings-5-line"></i><span class="text-sm">9-Speed Auto</span></div>
+      <div class="flex items-center gap-2"><i class="ri-roadster-line"></i><span class="text-sm">RWD</span></div>
+    </div>
+    <div class="flex gap-3">
+      <button class="flex-1 bg-[#FFD700] hover:bg-[#e6c200] text-[#101010] px-4 py-2 text-sm font-medium rounded transition">Learn More</button>
+      <button class="flex-1 border border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700]/10 px-4 py-2 text-sm font-medium rounded transition">Test Drive</button>
+    </div>
+  </div>
+</div>
+
+<!-- Vehicle Card 5 -->
+<div class="bg-[#101010] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+  <div class="relative">
+    <img src="bentley/Bentleys/continental gt.webp" alt="Bentley Continental GT" class="w-full h-64 object-cover object-center">
+    <div class="absolute inset-0 bg-gradient-to-t from-[#FFD700]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+      <h4 class="text-xl font-bold">Bentley Continental GT</h4>
+      <p class="text-sm opacity-90">Effortless power with handcrafted luxury</p>
+    </div>
+  </div>
+  <div class="p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-bold text-[#FFD700]">Bentley Continental GT</h3>
+      <span class="text-white font-semibold">$240,800</span>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mb-6 text-white">
+      <div class="flex items-center gap-2"><i class="ri-dashboard-3-line"></i><span class="text-sm">626 HP</span></div>
+      <div class="flex items-center gap-2"><i class="ri-speed-up-line"></i><span class="text-sm">0-60 in 3.5s</span></div>
+      <div class="flex items-center gap-2"><i class="ri-settings-5-line"></i><span class="text-sm">8-Speed Auto</span></div>
+      <div class="flex items-center gap-2"><i class="ri-roadster-line"></i><span class="text-sm">AWD</span></div>
+    </div>
+    <div class="flex gap-3">
+      <button class="flex-1 bg-[#FFD700] hover:bg-[#e6c200] text-[#101010] px-4 py-2 text-sm font-medium rounded transition">Learn More</button>
+      <button class="flex-1 border border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700]/10 px-4 py-2 text-sm font-medium rounded transition">Test Drive</button>
+    </div>
+  </div>
+</div>
+
+<!-- Vehicle Card 6  -->
+<div class="bg-[#101010] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+  <div class="relative">
+    <img src="porsche/Porsches/porsche 911 turbo s.jpg" alt="Porsche 911 GT3 RS" class="w-full h-64 object-cover object-center">
+    <div class="absolute inset-0 bg-gradient-to-t from-[#FFD700]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 text-white">
+      <h4 class="text-xl font-bold">Porsche 911 GT3 RS</h4>
+      <p class="text-sm opacity-90">Track-honed precision in a street-legal beast</p>
+    </div>
+  </div>
+  <div class="p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-bold text-[#FFD700]">Porsche 911 GT3 RS</h3>
+      <span class="text-white font-semibold">$241,300</span>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mb-6 text-white">
+      <div class="flex items-center gap-2"><i class="ri-dashboard-3-line"></i><span class="text-sm">518 HP</span></div>
+      <div class="flex items-center gap-2"><i class="ri-speed-up-line"></i><span class="text-sm">0-60 in 3.0s</span></div>
+      <div class="flex items-center gap-2"><i class="ri-settings-5-line"></i><span class="text-sm">7-Speed PDK</span></div>
+      <div class="flex items-center gap-2"><i class="ri-roadster-line"></i><span class="text-sm">RWD</span></div>
+    </div>
+    <div class="flex gap-3">
+      <button class="flex-1 bg-[#FFD700] hover:bg-[#e6c200] text-[#101010] px-4 py-2 text-sm font-medium rounded transition">Learn More</button>
+      <button class="flex-1 border border-[#FFD700] text-[#FFD700] hover:bg-[#FFD700]/10 px-4 py-2 text-sm font-medium rounded transition">Test Drive</button>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="bg-[#101010] text-white">
+  <div class="container mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div>
+        <h3 class="text-xl font-['Oswald'] text-[#FFD700] mb-6">WheelsHub</h3>
+        <p class="text-gray-400 mb-6">Experience the pinnacle of automotive luxury and performance with our exclusive collection of premium vehicles.</p>
+        <div class="flex space-x-4">
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-[#FFD700] text-white hover:text-[#101010] transition">
+            <i class="ri-facebook-fill"></i>
+          </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-[#FFD700] text-white hover:text-[#101010] transition">
+            <i class="ri-instagram-line"></i>
+          </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-[#FFD700] text-white hover:text-[#101010] transition">
+            <i class="ri-twitter-x-line"></i>
+          </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full hover:bg-[#FFD700] text-white hover:text-[#101010] transition">
+            <i class="ri-youtube-line"></i>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-[#FFD700] mb-6">Quick Links</h3>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">Home</a></li>
+          <li><a href="brands.html" class="text-gray-400 hover:text-[#FFD700] transition">Brands</a></li>
+          <li><a href="Test_drive.html" class="text-gray-400 hover:text-[#FFD700] transition">Test Drive</a></li>
+          <li><a href="about.html" class="text-gray-400 hover:text-[#FFD700] transition">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-[#FFD700] mb-6">Brands</h3>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">Porsche</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">Audi</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">BMW</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">Mercedes-Benz</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">Lamborghini</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-[#FFD700] mb-6">Contact Us</h3>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <div class="w-5 h-5 flex items-center justify-center mt-0.5">
+              <i class="ri-map-pin-line text-[#FFD700]"></i>
+            </div>
+            <span class="text-gray-400">Yet to be announced</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="w-5 h-5 flex items-center justify-center mt-0.5">
+              <i class="ri-phone-line text-[#FFD700]"></i>
+            </div>
+            <span class="text-gray-400">+1 (800) 555-LUXE</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="w-5 h-5 flex items-center justify-center mt-0.5">
+              <i class="ri-mail-line text-[#FFD700]"></i>
+            </div>
+            <span class="text-gray-400">info@luxuryautos.com</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Luxury Auto Collective. All rights reserved.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#" class="text-gray-400 text-sm hover:text-[#FFD700] transition">Privacy Policy</a>
+        <a href="#" class="text-gray-400 text-sm hover:text-[#FFD700] transition">Terms of Service</a>
+        <a href="#" class="text-gray-400 text-sm hover:text-[#FFD700] transition">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script id="horizontal-scroll-script">
+document.addEventListener('DOMContentLoaded', function() {
+const scrollContainer = document.getElementById('brands-container');
+const scrollLeftBtn = document.getElementById('scroll-left');
+const scrollRightBtn = document.getElementById('scroll-right');
+scrollLeftBtn.addEventListener('click', function() {
+scrollContainer.scrollBy({ left: -300, behavior: 'smooth' });
+});
+scrollRightBtn.addEventListener('click', function() {
+scrollContainer.scrollBy({ left: 300, behavior: 'smooth' });
+});
+});
+</script>
+<script id="spec-toggle-script">
+document.addEventListener('DOMContentLoaded', function() {
+const specToggles = document.querySelectorAll('.spec-toggle');
+specToggles.forEach(toggle => {
+toggle.addEventListener('click', function() {
+const expanded = this.getAttribute('aria-expanded') === 'true';
+const contentId = this.getAttribute('aria-controls');
+const content = document.getElementById(contentId);
+const icon = this.querySelector('.ri-arrow-down-s-line').parentElement;
+if (expanded) {
+this.setAttribute('aria-expanded', 'false');
+content.classList.add('hidden');
+content.setAttribute('aria-hidden', 'true');
+icon.classList.remove('rotate-180');
+} else {
+this.setAttribute('aria-expanded', 'true');
+content.classList.remove('hidden');
+content.setAttribute('aria-hidden', 'false');
+icon.classList.add('rotate-180');
+}
+});
+});
+});
+</script>
+<script id="search-dialog-script">
+document.addEventListener('DOMContentLoaded', function() {
+const searchTrigger = document.getElementById('search-trigger');
+const searchDialog = document.getElementById('search-dialog');
+const searchClose = document.getElementById('search-close');
+const searchInput = document.getElementById('search-input');
+const searchSuggestions = document.getElementById('search-suggestions');
+const searchEmpty = document.getElementById('search-empty');
+const searchFilters = document.querySelectorAll('.search-filter');
+function toggleSearch(show) {
+if (show) {
+searchDialog.classList.remove('hidden');
+document.body.style.overflow = 'hidden';
+searchInput.focus();
+} else {
+searchDialog.classList.add('hidden');
+document.body.style.overflow = '';
+searchInput.value = '';
+searchSuggestions.classList.add('hidden');
+searchEmpty.classList.add('hidden');
+}
+}
+searchTrigger.addEventListener('click', () => toggleSearch(true));
+searchClose.addEventListener('click', () => toggleSearch(false));
+searchDialog.addEventListener('click', (e) => {
+if (e.target === searchDialog) {
+toggleSearch(false);
+}
+});
+searchInput.addEventListener('input', (e) => {
+const value = e.target.value.trim();
+if (value.length > 0) {
+searchSuggestions.classList.remove('hidden');
+searchEmpty.classList.add('hidden');
+} else {
+searchSuggestions.classList.add('hidden');
+searchEmpty.classList.add('hidden');
+}
+});
+searchInput.addEventListener('keydown', (e) => {
+if (e.key === 'Enter') {
+const value = e.target.value.trim();
+if (value.length > 0) {
+searchSuggestions.classList.add('hidden');
+searchEmpty.classList.remove('hidden');
+}
+}
+});
+searchFilters.forEach(filter => {
+filter.addEventListener('click', () => {
+searchFilters.forEach(f => {
+f.classList.remove('bg-primary/10', 'text-primary');
+f.classList.add('bg-gray-100', 'text-gray-600');
+});
+filter.classList.remove('bg-gray-100', 'text-gray-600');
+filter.classList.add('bg-primary/10', 'text-primary');
+});
+});
+});
+</script>
+<script id="test-drive-form-script">
+document.addEventListener('DOMContentLoaded', function() {
+const form = document.getElementById('test-drive-form');
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+// Get form values
+const vehicle = document.getElementById('vehicle').value;
+const date = document.getElementById('date').value;
+const time = document.getElementById('time').value;
+const firstName = document.getElementById('first-name').value;
+const lastName = document.getElementById('last-name').value;
+const email = document.getElementById('email').value;
+const phone = document.getElementById('phone').value;
+const location = document.getElementById('location').value;
+const terms = document.getElementById('terms').checked;
+// Validate form
+if (!vehicle || !date || !time || !firstName || !lastName || !email || !phone || !location || !terms) {
+alert('Please fill out all fields and accept the terms and conditions.');
+return;
+}
+// Form submission success
+alert('Thank you! Your test drive has been scheduled. We will contact you shortly to confirm the details.');
+form.reset();
+});
+});
+</script>
+</body>
+</html>
