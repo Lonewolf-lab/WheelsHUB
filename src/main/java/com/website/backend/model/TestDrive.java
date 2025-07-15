@@ -1,8 +1,15 @@
 package com.website.backend.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime; // For timestamp
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "test_drives") // Define the table name
 public class TestDrive {
@@ -32,10 +39,6 @@ public class TestDrive {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt; // Timestamp for when the request was created
 
-    // Constructors
-    public TestDrive() {
-    }
-
     public TestDrive(String fullName, String phoneNumber, String emailAddress, String brand, String carModel, Boolean agreeTerms) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
@@ -51,82 +54,6 @@ public class TestDrive {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getCarModel() {
-        return carModel;
-    }
-
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
-    }
-
-    public Boolean getAgreeTerms() {
-        return agreeTerms;
-    }
-
-    public void setAgreeTerms(Boolean agreeTerms) {
-        this.agreeTerms = agreeTerms;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    @Override
-    public String toString() {
-        return "TestDrive{" +
-                "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", brand='" + brand + '\'' +
-                ", carModel='" + carModel + '\'' +
-                ", agreeTerms=" + agreeTerms +
-                ", createdAt=" + createdAt +
-                '}';
-    }
 }

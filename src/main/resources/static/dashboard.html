@@ -53,7 +53,6 @@
 </head>
 <body class="text-white min-h-screen flex flex-col">
 
-<!-- Header -->
 <header class="bg-[#0a0a0a] p-4 flex flex-col md:flex-row justify-between items-center shadow-lg sticky top-0 z-50">
   <div class="flex items-center gap-4 mb-4 md:mb-0">
     <img src="photos/wheelshub logo no bg.png" alt="WheelsHub Logo" class="h-12">
@@ -70,11 +69,9 @@
   </nav>
 </header>
 
-<!-- Main Content -->
 <main class="flex-grow p-4 md:p-8">
   <div class="max-w-7xl mx-auto">
 
-    <!-- Hero Section -->
     <section class="hero-section">
       <h2 class="text-5xl font-extrabold gold-text mb-4">Welcome Back, <span id="userNameDisplay">User</span>!</h2>
       <p class="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">Your personalized gateway to the world of luxury automobiles. Explore, manage, and experience the best.</p>
@@ -145,7 +142,7 @@
           <h3 class="text-2xl font-bold gold-text mb-5 flex items-center gap-3"><i class="ph ph-sparkle text-3xl"></i> Personalized Recommendations</h3>
           <div class="space-y-4">
             <div class="flex items-center gap-4">
-              <img src="Mercs/s class.jpg" alt="Mercedes S-Class" class="w-20 h-16 object-cover rounded-md">
+              <img src="mercedes/Mercs/s class.jpg" alt="Mercedes S-Class" class="w-20 h-16 object-cover rounded-md">
               <div>
                 <p class="font-semibold text-white">Mercedes-Benz S-Class</p>
                 <p class="text-sm text-gray-400">$120,000</p>
@@ -153,7 +150,7 @@
               <a href="#" class="ml-auto gold-text hover:text-white transition"><i class="ph ph-arrow-right text-xl"></i></a>
             </div>
             <div class="flex items-center gap-4">
-              <img src="Porsches/porsche 911 turbo s.jpg" alt="Porsche 911" class="w-20 h-16 object-cover rounded-md">
+              <img src="porsche/Porsches/porsche 911 turbo s.jpg" alt="Porsche 911" class="w-20 h-16 object-cover rounded-md">
               <div>
                 <p class="font-semibold text-white">Porsche 911</p>
                 <p class="text-sm text-gray-400">$120,100</p>
@@ -161,7 +158,7 @@
               <a href="#" class="ml-auto gold-text hover:text-white transition"><i class="ph ph-arrow-right text-xl"></i></a>
             </div>
             <div class="flex items-center gap-4">
-              <img src="Lamborghinis/urus.webp" alt="Lamborghini Urus" class="w-20 h-16 object-cover rounded-md">
+              <img src="lamborghini/Lamborghinis/urus.webp" alt="Lamborghini Urus" class="w-20 h-16 object-cover rounded-md">
               <div>
                 <p class="font-semibold text-white">Lamborghini Urus</p>
                 <p class="text-sm text-gray-400">$230,000</p>
@@ -201,7 +198,6 @@
   </div>
 </main>
 
-<!-- Footer -->
 <footer class="bg-[#0a0a0a] p-6 text-center text-gray-400 shadow-inner mt-auto">
   <p>&copy; 2023 WheelsHub. All rights reserved.</p>
   <p class="text-sm mt-2">Designed with passion for luxury automobiles.</p>
@@ -233,14 +229,12 @@
     userEmailDisplay.textContent = userEmail;
     lastLoginDisplay.textContent = new Date().toLocaleString();
 
-    // Placeholder for dynamic data (replace with actual API calls)
     carsViewedCount.textContent = Math.floor(Math.random() * 50) + 10;
     testDrivesCount.textContent = Math.floor(Math.random() * 5);
     favoriteModelsCount.textContent = Math.floor(Math.random() * 10);
     unreadNotificationsCount.textContent = Math.floor(Math.random() * 3);
 
 
-    // Logout functionality
     logoutButton.addEventListener('click', (e) => {
       e.preventDefault();
       localStorage.removeItem('jwtToken');
@@ -251,7 +245,7 @@
 
     // Example of fetching user-specific data (e.g., appointments) - Placeholder
     // This would typically involve an authenticated API call to your Spring Boot backend
-    /*
+
     fetch('/api/user/appointments', {
       headers: {
         'Authorization': `Bearer ${jwtToken}`
@@ -285,7 +279,7 @@
       }
     })
     .catch(error => console.error('Error fetching appointments:', error));
-    */
+
   });
 </script>
 </body>
