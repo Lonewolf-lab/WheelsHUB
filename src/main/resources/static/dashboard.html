@@ -3,55 +3,339 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WheelsHub Dashboard</title>
+  <title>User Dashboard - WheelsHub</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <style>
     body {
       font-family: 'Outfit', sans-serif;
+      background-color: #1c1c1c; /* Charcoal Black */
+    }
+    .card {
+      background-color: #0a0a0a;
+      border: 1px solid #2a2a2a;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+    .gold-text {
+      color: #FFD700;
+    }
+    .gold-border {
+      border-color: #FFD700;
+    }
+    .gold-bg {
+      background-color: #FFD700;
+    }
+    .gold-bg:hover {
+      background-color: #e6c200;
+    }
+    .section-title {
+      font-size: 2.25rem; /* text-4xl */
+      font-weight: 700; /* font-bold */
+      color: #FFD700;
+      margin-bottom: 1.5rem; /* mb-6 */
+      text-align: center;
+    }
+    .hero-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/photos/dashboard-hero.webp') no-repeat center center;
+      background-size: cover;
+      padding: 6rem 2rem;
+      text-align: center;
+      border-radius: 0.75rem;
+      margin-bottom: 2rem;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
     }
   </style>
 </head>
-<body class="bg-[#1c1c1c] text-white min-h-screen px-4 py-8">
+<body class="text-white min-h-screen flex flex-col">
 
-  <div class="max-w-4xl mx-auto bg-[#0a0a0a] p-8 rounded-xl shadow-2xl">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-bold text-[#FFD700]">Welcome to WheelsHub, <span id="userName">User</span>!</h1>
-      <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Logout</button>
-    </div>
+<!-- Header -->
+<header class="bg-[#0a0a0a] p-4 flex flex-col md:flex-row justify-between items-center shadow-lg sticky top-0 z-50">
+  <div class="flex items-center gap-4 mb-4 md:mb-0">
+    <img src="photos/wheelshub logo no bg.png" alt="WheelsHub Logo" class="h-12">
+    <h1 class="text-3xl font-bold gold-text">WheelsHub Dashboard</h1>
+  </div>
+  <nav>
+    <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-lg">
+      <li><a href="/site.html" class="text-gray-300 hover:gold-text transition duration-300">Home</a></li>
+      <li><a href="/brands.html" class="text-gray-300 hover:gold-text transition duration-300">Brands</a></li>
+      <li><a href="/Test_drive.html" class="text-gray-300 hover:gold-text transition duration-300">Test Drive</a></li>
+      <li><a href="/about.html" class="text-gray-300 hover:gold-text transition duration-300">About Us</a></li>
+      <li><a href="#" id="logoutButton" class="text-red-400 hover:text-red-600 transition duration-300">Logout</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <div class="mt-8">
-      <h2 class="text-xl font-semibold text-white mb-4">Your Dashboard</h2>
-      <div class="bg-[#1a1a1a] p-6 rounded border border-gray-700">
-        <p class="text-gray-300 mb-2">🚗 <strong>Test Drive Status:</strong> (Coming Soon)</p>
-        <p class="text-gray-300">📦 <strong>Order Status:</strong> (Coming Soon)</p>
+<!-- Main Content -->
+<main class="flex-grow p-4 md:p-8">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h2 class="text-5xl font-extrabold gold-text mb-4">Welcome Back, <span id="userNameDisplay">User</span>!</h2>
+      <p class="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">Your personalized gateway to the world of luxury automobiles. Explore, manage, and experience the best.</p>
+      <div class="flex justify-center gap-4">
+        <a href="/brands.html" class="gold-bg text-[#0a0a0a] font-bold py-3 px-8 rounded-full shadow-lg hover:gold-bg transition duration-300">Explore Cars</a>
+        <a href="/Test_drive.html" class="border border-gray-500 text-gray-200 font-bold py-3 px-8 rounded-full shadow-lg hover:border-gold-text hover:text-gold-text transition duration-300">Schedule Test Drive</a>
+      </div>
+    </section>
+
+    <!-- Key Metrics / Quick Stats -->
+    <section class="mb-12">
+      <h3 class="section-title">Your WheelsHub At A Glance</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="card p-6 rounded-lg shadow-lg text-center">
+          <i class="ph ph-car text-5xl gold-text mb-3"></i>
+          <p class="text-gray-400 text-sm">Cars Viewed</p>
+          <p class="text-3xl font-bold text-white" id="carsViewedCount">0</p>
+        </div>
+        <div class="card p-6 rounded-lg shadow-lg text-center">
+          <i class="ph ph-calendar-check text-5xl gold-text mb-3"></i>
+          <p class="text-gray-400 text-sm">Test Drives Booked</p>
+          <p class="text-3xl font-bold text-white" id="testDrivesCount">0</p>
+        </div>
+        <div class="card p-6 rounded-lg shadow-lg text-center">
+          <i class="ph ph-heart text-5xl gold-text mb-3"></i>
+          <p class="text-gray-400 text-sm">Favorite Models</p>
+          <p class="text-3xl font-bold text-white" id="favoriteModelsCount">0</p>
+        </div>
+        <div class="card p-6 rounded-lg shadow-lg text-center">
+          <i class="ph ph-bell text-5xl gold-text mb-3"></i>
+          <p class="text-gray-400 text-sm">Unread Notifications</p>
+          <p class="text-3xl font-bold text-white" id="unreadNotificationsCount">0</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Left Column (Profile, Appointments, Quick Links) -->
+      <div class="lg:col-span-2 space-y-8">
+
+        <!-- Profile Section -->
+        <section class="card p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold gold-text mb-5 flex items-center gap-3"><i class="ph ph-user-circle text-3xl"></i> Your Profile</h3>
+          <div class="space-y-3 text-lg text-gray-300">
+            <p><strong>Email:</strong> <span id="userEmailDisplay" class="text-white"></span></p>
+            <p><strong>Membership:</strong> <span class="text-green-400 font-semibold">Premium Member</span></p>
+            <p><strong>Last Login:</strong> <span id="lastLoginDisplay" class="text-white">Just now</span></p>
+          </div>
+          <button class="gold-bg text-[#0a0a0a] font-semibold py-2 px-5 rounded-full hover:gold-bg transition mt-6">Edit Profile</button>
+        </section>
+
+        <!-- Test Drive Appointments -->
+        <section class="card p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold gold-text mb-5 flex items-center gap-3"><i class="ph ph-calendar-blank text-3xl"></i> Upcoming Test Drives</h3>
+          <ul id="appointmentsList" class="space-y-3 text-lg text-gray-300">
+            <li class="flex items-center gap-3"><i class="ph ph-info text-xl gold-text"></i> No upcoming appointments.</li>
+            <!-- Appointments will be dynamically loaded here -->
+          </ul>
+          <a href="/Test_drive.html" class="gold-bg text-[#0a0a0a] font-semibold py-2 px-5 rounded-full hover:gold-bg transition mt-6 inline-block">Schedule New Test Drive</a>
+        </section>
+
+        <!-- Recent Activity / Notifications -->
+        <section class="card p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold gold-text mb-5 flex items-center gap-3"><i class="ph ph-activity text-3xl"></i> Recent Activity</h3>
+          <ul id="activityList" class="space-y-4 text-gray-300">
+            <li class="flex items-start gap-3">
+              <i class="ph ph-check-circle text-xl text-green-400 mt-1"></i>
+              <div>
+                <p class="font-semibold text-white">Test Drive Confirmed</p>
+                <p class="text-sm text-gray-400">Your test drive for the <span class="gold-text">Porsche 911</span> on <span class="text-white">2024-07-20</span> has been confirmed.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="ph ph-star text-xl gold-text mt-1"></i>
+              <div>
+                <p class="font-semibold text-white">New Favorite Added</p>
+                <p class="text-sm text-gray-400">You added the <span class="gold-text">McLaren 720S</span> to your favorites.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <i class="ph ph-bell-ringing text-xl text-blue-400 mt-1"></i>
+              <div>
+                <p class="font-semibold text-white">New Offer Available</p>
+                <p class="text-sm text-gray-400">Exclusive financing options for <span class="gold-text">Mercedes-Benz S-Class</span>.</p>
+              </div>
+            </li>
+          </ul>
+          <button class="border border-gray-500 text-gray-200 font-semibold py-2 px-5 rounded-full hover:border-gold-text hover:text-gold-text transition mt-6">View All Activity</button>
+        </section>
+
+      </div>
+
+      <!-- Right Column (Recommendations, Exclusive Offers, Quick Links) -->
+      <div class="lg:col-span-1 space-y-8">
+
+        <!-- Personalized Recommendations -->
+        <section class="card p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold gold-text mb-5 flex items-center gap-3"><i class="ph ph-sparkle text-3xl"></i> Personalized Recommendations</h3>
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <img src="Mercs/s class.jpg" alt="Mercedes S-Class" class="w-20 h-16 object-cover rounded-md">
+              <div>
+                <p class="font-semibold text-white">Mercedes-Benz S-Class</p>
+                <p class="text-sm text-gray-400">$120,000</p>
+              </div>
+              <a href="#" class="ml-auto gold-text hover:text-white transition"><i class="ph ph-arrow-right text-xl"></i></a>
+            </div>
+            <div class="flex items-center gap-4">
+              <img src="Porsches/porsche 911 turbo s.jpg" alt="Porsche 911" class="w-20 h-16 object-cover rounded-md">
+              <div>
+                <p class="font-semibold text-white">Porsche 911</p>
+                <p class="text-sm text-gray-400">$120,100</p>
+              </div>
+              <a href="#" class="ml-auto gold-text hover:text-white transition"><i class="ph ph-arrow-right text-xl"></i></a>
+            </div>
+            <div class="flex items-center gap-4">
+              <img src="Lamborghinis/urus.webp" alt="Lamborghini Urus" class="w-20 h-16 object-cover rounded-md">
+              <div>
+                <p class="font-semibold text-white">Lamborghini Urus</p>
+                <p class="text-sm text-gray-400">$230,000</p>
+              </div>
+              <a href="#" class="ml-auto gold-text hover:text-white transition"><i class="ph ph-arrow-right text-xl"></i></a>
+            </div>
+          </div>
+          <button class="border border-gray-500 text-gray-200 font-semibold py-2 px-5 rounded-full hover:border-gold-text hover:text-gold-text transition mt-6 w-full">View More Recommendations</button>
+        </section>
+
+        <!-- Exclusive Offers -->
+        <section class="card p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold gold-text mb-5 flex items-center gap-3"><i class="ph ph-gift text-3xl"></i> Exclusive Offers</h3>
+          <div class="space-y-4">
+            <div class="bg-[#1a1a1a] p-4 rounded-md border border-gray-700">
+              <p class="font-semibold text-white">Special Financing on <span class="gold-text">Rolls-Royce Ghost</span></p>
+              <p class="text-sm text-gray-400">0.9% APR for 60 months. Limited time offer!</p>
+            </div>
+            <div class="bg-[#1a1a1a] p-4 rounded-md border border-gray-700">
+              <p class="font-semibold text-white">Complimentary Detailing for New <span class="gold-text">McLaren</span> Purchases</p>
+              <p class="text-sm text-gray-400">Receive a full premium detailing package.</p>
+            </div>
+          </div>
+          <button class="gold-bg text-[#0a0a0a] font-semibold py-2 px-5 rounded-full hover:gold-bg transition mt-6 w-full">View All Offers</button>
+        </section>
+
+        <!-- Quick Links -->
+        <section class="card p-8 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold gold-text mb-5 flex items-center gap-3"><i class="ph ph-link text-3xl"></i> Quick Links</h3>
+          <div class="grid grid-cols-2 gap-4 text-center">
+            <a href="/brands.html" class="bg-[#1a1a1a] p-4 rounded-lg hover:gold-bg hover:text-[#0a0a0a] transition duration-300">
+              <i class="ph ph-car-simple text-3xl mb-2"></i>
+              <p class="text-sm font-semibold">Browse All Cars</p>
+            </a>
+            <a href="/Test_drive.html" class="bg-[#1a1a1a] p-4 rounded-lg hover:gold-bg hover:text-[#0a0a0a] transition duration-300">
+              <i class="ph ph-steering-wheel text-3xl mb-2"></i>
+              <p class="text-sm font-semibold">Book a Test Drive</p>
+            </a>
+            <a href="/about.html" class="bg-[#1a1a1a] p-4 rounded-lg hover:gold-bg hover:text-[#0a0a0a] transition duration-300">
+              <i class="ph ph-info text-3xl mb-2"></i>
+              <p class="text-sm font-semibold">About WheelsHub</p>
+            </a>
+            <a href="#" class="bg-[#1a1a1a] p-4 rounded-lg hover:gold-bg hover:text-[#0a0a0a] transition duration-300">
+              <i class="ph ph-question text-3xl mb-2"></i>
+              <p class="text-sm font-semibold">Support</p>
+            </a>
+          </div>
+        </section>
+
       </div>
     </div>
+
   </div>
+</main>
 
-  <script>
-    // Check JWT token
-    const token = localStorage.getItem('jwtToken');
-    if (!token) {
-      alert("You must log in first.");
+<!-- Footer -->
+<footer class="bg-[#0a0a0a] p-6 text-center text-gray-400 shadow-inner mt-auto">
+  <p>&copy; 2023 WheelsHub. All rights reserved.</p>
+  <p class="text-sm mt-2">Designed with passion for luxury automobiles.</p>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    const userEmailDisplay = document.getElementById('userEmailDisplay');
+    const logoutButton = document.getElementById('logoutButton');
+    const appointmentsList = document.getElementById('appointmentsList');
+    const lastLoginDisplay = document.getElementById('lastLoginDisplay');
+
+    // Placeholder for dynamic counts
+    const carsViewedCount = document.getElementById('carsViewedCount');
+    const testDrivesCount = document.getElementById('testDrivesCount');
+    const favoriteModelsCount = document.getElementById('favoriteModelsCount');
+    const unreadNotificationsCount = document.getElementById('unreadNotificationsCount');
+
+    // Retrieve user info from localStorage
+    const userName = localStorage.getItem('userName') || 'User';
+    const userEmail = localStorage.getItem('userEmail') || 'N/A';
+    const jwtToken = localStorage.getItem('jwtToken');
+
+    // If no token, redirect to login
+    if (!jwtToken) {
       window.location.href = "/auth.html";
+      return;
     }
 
-    // Optionally decode token and get username (requires a JWT decoder if needed)
-    const email = localStorage.getItem('userEmail'); // store during login if needed
-    const fullName = localStorage.getItem('userName'); // store during login if needed
-    if (fullName) {
-      document.getElementById('userName').innerText = fullName;
-    }
+    userNameDisplay.textContent = userName;
+    userEmailDisplay.textContent = userEmail;
+    lastLoginDisplay.textContent = new Date().toLocaleString(); // Set current time as last login
 
-    // Logout function
-    function logout() {
+    // Placeholder for dynamic data (replace with actual API calls)
+    carsViewedCount.textContent = Math.floor(Math.random() * 50) + 10; // Random number for demo
+    testDrivesCount.textContent = Math.floor(Math.random() * 5);
+    favoriteModelsCount.textContent = Math.floor(Math.random() * 10);
+    unreadNotificationsCount.textContent = Math.floor(Math.random() * 3);
+
+
+    // Logout functionality
+    logoutButton.addEventListener('click', (e) => {
+      e.preventDefault();
       localStorage.removeItem('jwtToken');
       localStorage.removeItem('userName');
       localStorage.removeItem('userEmail');
       window.location.href = "/auth.html";
-    }
-  </script>
+    });
 
+    // Example of fetching user-specific data (e.g., appointments) - Placeholder
+    // This would typically involve an authenticated API call to your Spring Boot backend
+    /*
+    fetch('/api/user/appointments', {
+      headers: {
+        'Authorization': `Bearer ${jwtToken}`
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        if (response.status === 401) { // Unauthorized
+          localStorage.removeItem('jwtToken');
+          localStorage.removeItem('userName');
+          localStorage.removeItem('userEmail');
+          window.location.href = "/auth.html";
+        }
+        throw new Error('Network response was not ok.');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data && data.length > 0) {
+        appointmentsList.innerHTML = ''; // Clear placeholder
+        data.forEach(appointment => {
+          const li = document.createElement('li');
+          li.className = "flex items-center gap-3";
+          li.innerHTML = `<i class="ph ph-calendar-check text-xl gold-text"></i>
+                          <div>
+                              <p class="font-semibold text-white">${appointment.carModel}</p>
+                              <p class="text-sm text-gray-400">on ${new Date(appointment.date).toLocaleDateString()} at ${appointment.time}</p>
+                          </div>`;
+          appointmentsList.appendChild(li);
+        });
+      }
+    })
+    .catch(error => console.error('Error fetching appointments:', error));
+    */
+  });
+</script>
 </body>
 </html>

@@ -5,150 +5,246 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Schedule Test Drive | WheelsHub</title>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <style>
     body {
-      background-color: #1a1a1a; /* Charcoal Grey */
-      font-family: 'Segoe UI', sans-serif;
+      background-color: #1c1c1c; /* Charcoal Black */
+      font-family: 'Outfit', sans-serif;
+      color: #e0e0e0; /* Light gray text for readability */
     }
-    .bg-primary {
-      background-color: #101010;
+    .header-bg {
+      background-color: #0a0a0a;
     }
-    .text-primary {
-      color: #101010;
+    .form-container {
+      background-color: #0a0a0a; /* Darker background for the form card */
+      border: 1px solid #2a2a2a; /* Subtle border */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Deeper shadow */
     }
-    .text-secondary {
+    .info-section {
+      background: linear-gradient(135deg, #1a1a1a, #0a0a0a); /* Subtle gradient */
+      border-right: 1px solid #2a2a2a; /* Separator */
+    }
+    .gold-text {
       color: #FFD700;
     }
-    .bg-secondary {
+    .gold-bg {
       background-color: #FFD700;
     }
-    .form-bg {
-      background-color: #101010;
+    .gold-bg:hover {
+      background-color: #e6c200;
     }
-    .input-border {
+    .input-field {
+      background-color: #1a1a1a; /* Input background */
+      border: 1px solid #3a3a3a; /* Input border */
+      color: #e0e0e0;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .input-field:focus {
       border-color: #FFD700;
+      box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3); /* Gold glow on focus */
+      outline: none;
+    }
+    /* Custom styling for select dropdowns */
+    .custom-select-wrapper {
+      position: relative;
+    }
+    .custom-select-wrapper::after {
+      content: '\ea4e'; /* Remixicon arrow-down-s-line */
+      font-family: 'remixicon' !important;
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: #FFD700;
+      font-size: 1.25rem;
+    }
+    .custom-select {
+      -webkit-appearance: none; /* Remove default arrow for Chrome/Safari */
+      -moz-appearance: none; /* Remove default arrow for Firefox */
+      appearance: none; /* Remove default arrow for other browsers */
+      padding-right: 2.5rem; /* Make space for custom arrow */
     }
   </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
+
+<!-- Header -->
+<header class="header-bg p-4 flex flex-col md:flex-row justify-between items-center shadow-lg sticky top-0 z-50">
+  <div class="flex items-center gap-4 mb-4 md:mb-0">
+    <img src="photos/wheelshub logo no bg.png" alt="WheelsHub Logo" class="h-12">
+    <h1 class="text-3xl font-bold gold-text">WheelsHub</h1>
+  </div>
+  <nav>
+    <ul class="flex flex-wrap justify-center space-x-4 md:space-x-6 text-lg">
+      <li><a href="/site.html" class="text-gray-300 hover:gold-text transition duration-300">Home</a></li>
+      <li><a href="/brands.html" class="text-gray-300 hover:gold-text transition duration-300">Brands</a></li>
+      <li><a href="/Test_drive.html" class="gold-text transition duration-300">Test Drive</a></li>
+      <li><a href="/about.html" class="text-gray-300 hover:gold-text transition duration-300">About Us</a></li>
+      <li><a href="/auth.html" class="bg-gold-text text-[#0a0a0a] font-semibold py-2 px-4 rounded hover:bg-yellow-500 transition">Login / Sign Up</a></li>
+    </ul>
+  </nav>
+</header>
 
 <!-- Test Drive Scheduler -->
-<section id="test-drive" class="py-20 min-h-screen bg-[#1a1a1a]">
+<main class="flex-grow py-12 md:py-20 bg-[#1c1c1c]">
   <div class="container mx-auto px-6">
-    <div class="max-w-4xl mx-auto bg-[#101010] text-white rounded-lg shadow-lg overflow-hidden">
+    <div class="max-w-5xl mx-auto form-container rounded-xl overflow-hidden">
       <div class="flex flex-col md:flex-row">
         <!-- Left Side Info -->
-        <div class="md:w-1/2 p-8 md:p-12 bg-primary">
-          <h2 class="text-3xl font-bold mb-6 text-secondary">Schedule Your Test Drive</h2>
-          <p class="mb-8 text-white/90">Experience the thrill of driving your dream luxury vehicle. Schedule a personalized test drive at your convenience.</p>
+        <div class="md:w-1/2 p-8 md:p-12 info-section text-white">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6 gold-text">Schedule Your Test Drive</h2>
+          <p class="mb-8 text-white/90 leading-relaxed">Experience the thrill of driving your dream luxury vehicle. Schedule a personalized test drive at your convenience and let us bring the WheelsHub experience to you.</p>
+
           <div class="mb-8">
-            <h3 class="text-xl font-semibold mb-4 text-secondary">What to Expect</h3>
+            <h3 class="text-xl font-semibold mb-4 gold-text">What to Expect</h3>
             <ul class="space-y-3 text-white/80">
-              <li class="flex items-start gap-3"><i class="ri-check-line w-6 text-secondary"></i><span>Personalized vehicle introduction</span></li>
-              <li class="flex items-start gap-3"><i class="ri-check-line w-6 text-secondary"></i><span>Comprehensive feature demonstration</span></li>
-              <li class="flex items-start gap-3"><i class="ri-check-line w-6 text-secondary"></i><span>Uninterrupted driving experience</span></li>
-              <li class="flex items-start gap-3"><i class="ri-check-line w-6 text-secondary"></i><span>Detailed financing options discussion</span></li>
+              <li class="flex items-start gap-3"><i class="ri-check-line w-6 text-gold-text text-xl"></i><span>Personalized vehicle introduction and detailed walkthrough.</span></li>
+              <li class="flex items-start gap-3"><i class="ri-check-line w-6 text-gold-text text-xl"></i><span>Comprehensive feature demonstration by our expert team.</span></li>
+              <li class="flex items-start gap-3"><i class="ri-check-line w-6 text-gold-text text-xl"></i><span>Uninterrupted driving experience on a pre-selected route.</span></li>
+              <li class="flex items-start gap-3"><i class="ri-check-line w-6 text-gold-text text-xl"></i><span>Detailed financing options discussion tailored to your needs.</span></li>
             </ul>
           </div>
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 flex items-center justify-center bg-white/20 rounded-full">
-              <i class="ri-customer-service-2-line ri-lg text-white"></i>
+
+          <div class="flex items-center gap-4 mt-8 p-4 bg-[#1a1a1a] rounded-lg border border-[#2a2a2a]">
+            <div class="w-12 h-12 flex items-center justify-center bg-gold-text/20 rounded-full">
+              <i class="ri-customer-service-2-line ri-lg text-gold-text text-2xl"></i>
             </div>
             <div>
-              <p class="text-sm opacity-80">Need assistance?</p>
-              <p class="font-semibold text-white">+1 (800) 555-LUXE</p>
+              <p class="text-sm opacity-80">Need assistance or have questions?</p>
+              <p class="font-semibold text-white text-lg">+1 (800) 555-LUXE</p>
             </div>
           </div>
         </div>
 
         <!-- Right Side Form -->
-        <div class="md:w-1/2 p-8 md:p-12 bg-[#1a1a1a]">
-          <form id="test-drive-form" class="space-y-6 text-white">
+        <div class="md:w-1/2 p-8 md:p-12 bg-[#1a1a1a] text-white">
+          <form id="test-drive-form" class="space-y-6">
             <div>
-              <label for="name" class="block text-sm font-medium mb-2 text-secondary">Full Name</label>
-              <input type="text" id="name" required class="w-full border border-[#FFD700] rounded p-3 bg-[#101010] text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]"/>
+              <label for="name" class="block text-sm font-medium mb-2 gold-text">Full Name</label>
+              <input type="text" id="name" required class="input-field w-full rounded p-3 focus:ring-gold-text"/>
             </div>
-
             <div>
-              <label for="phone" class="block text-sm font-medium mb-2 text-secondary">Phone Number</label>
-              <input type="tel" id="phone" required class="w-full border border-[#FFD700] rounded p-3 bg-[#101010] text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]"/>
+              <label for="phone" class="block text-sm font-medium mb-2 gold-text">Phone Number</label>
+              <input type="tel" id="phone" required class="input-field w-full rounded p-3 focus:ring-gold-text"/>
             </div>
-
             <div>
-              <label for="email" class="block text-sm font-medium mb-2 text-secondary">Email Address</label>
-              <input type="email" id="email" required class="w-full border border-[#FFD700] rounded p-3 bg-[#101010] text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]"/>
+              <label for="email" class="block text-sm font-medium mb-2 gold-text">Email Address</label>
+              <input type="email" id="email" required class="input-field w-full rounded p-3 focus:ring-gold-text"/>
             </div>
-
             <div>
-              <label for="brand" class="block text-sm font-medium mb-2 text-secondary">Select Brand</label>
-              <select id="brand" required class="w-full border border-[#FFD700] rounded p-3 bg-[#101010] text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
-                <option value="" disabled selected>Choose a brand</option>
-                <option value="porsche">Porsche</option>
-                <option value="audi">Audi</option>
-                <option value="bmw">BMW</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="lamborghini">Lamborghini</option>
-                <option value="ferrari">Ferrari</option>
-                <option value="bentley">Bentley</option>
-                <option value="rolls-royce">Rolls-Royce</option>
-              </select>
+              <label for="brand" class="block text-sm font-medium mb-2 gold-text">Select Brand</label>
+              <div class="custom-select-wrapper">
+                <select id="brand" required class="input-field custom-select w-full rounded p-3 focus:ring-gold-text">
+                  <option value="" disabled selected>Choose a brand</option>
+                  <option value="rolls-royce">Rolls Royce</option>
+                  <option value="bmw">BMW</option>
+                  <option value="mercedes">Mercedes</option>
+                  <option value="audi">Audi</option>
+                  <option value="ferrari">Ferrari</option>
+                  <option value="lamborghini">Lamborghini</option>
+                  <option value="bentley">Bentley</option>
+                  <option value="aston-martin">Aston Martin</option>
+                  <option value="mclaren">McLaren</option>
+                  <option value="porsche">Porsche</option>
+                </select>
+              </div>
             </div>
-
             <div>
-              <label for="car" class="block text-sm font-medium mb-2 text-secondary">Select Car</label>
-              <select id="car" required class="w-full border border-[#FFD700] rounded p-3 bg-[#101010] text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
-                <option value="" disabled selected>Choose a car</option>
-              </select>
+              <label for="car" class="block text-sm font-medium mb-2 gold-text">Select Car</label>
+              <div class="custom-select-wrapper">
+                <select id="car" required class="input-field custom-select w-full rounded p-3 focus:ring-gold-text" disabled>
+                  <option value="" disabled selected>Choose a car</option>
+                </select>
+              </div>
             </div>
-
             <div>
               <div class="flex items-start gap-3 text-sm text-white/80">
-                <input type="checkbox" id="terms" class="mt-1" required>
+                <input type="checkbox" id="terms" class="mt-1 accent-[#FFD700]" required>
                 <label for="terms" class="text-sm leading-relaxed">
-                I agree to the <a href="#" class="text-secondary hover:underline">Terms & Conditions</a> and 
-                <a href="#" class="text-secondary hover:underline">Privacy Policy</a>.
+                  I agree to the <a href="#" class="gold-text hover:underline">Terms & Conditions</a> and
+                  <a href="#" class="gold-text hover:underline">Privacy Policy</a>.
                 </label>
+              </div>
             </div>
-
-            </div>
-
-            <button type="submit" class="w-full bg-secondary hover:bg-[#e6c200] text-black font-semibold py-3 rounded transition">Schedule Test Drive</button>
+            <button type="submit" class="w-full gold-bg hover:gold-bg text-[#0a0a0a] font-semibold py-3 rounded transition">Schedule Test Drive</button>
           </form>
         </div>
       </div>
     </div>
   </div>
+</main>
 
-  <!-- Dynamic Car Dropdown Script -->
-  <script>
-    const carOptions = {
-      "porsche": ["911 Turbo S", "Panamera Turbo S"],
-      "audi": ["RS e-tron GT", "R8 V10 Plus"],
-      "bmw": ["M5 Competition", "X6 M"],
-      "mercedes": ["AMG GT 63 S", "S-Class Maybach"],
-      "lamborghini": ["Huracan STO", "Aventador SVJ"],
-      "ferrari": ["SF90 Stradale", "812 Superfast"],
-      "bentley": ["Continental GT", "Flying Spur"],
-      "rolls-royce": ["Ghost", "Phantom"]
-    };
+<!-- Footer -->
+<footer class="header-bg p-6 text-center text-gray-400 shadow-inner mt-auto">
+  <p>&copy; 2023 WheelsHub. All rights reserved.</p>
+  <div class="flex justify-center space-x-4 mt-4">
+    <a href="#" class="hover:gold-text transition"><i class="ph ph-facebook-logo text-2xl"></i></a>
+    <a href="#" class="hover:gold-text transition"><i class="ph ph-instagram-logo text-2xl"></i></a>
+    <a href="#" class="hover:gold-text transition"><i class="ph ph-twitter-logo text-2xl"></i></a>
+    <a href="#" class="hover:gold-text transition"><i class="ph ph-linkedin-logo text-2xl"></i></a>
+  </div>
+</footer>
 
-    const brandSelect = document.getElementById('brand');
-    const carSelect = document.getElementById('car');
+<!-- Dynamic Car Dropdown Script -->
+<script>
+  const carOptions = {
+    "rolls-royce": ["Spectre", "Phantom", "Cullinan", "Ghost", "Wraith"],
+    "bmw": ["BMW M8", "BMW M5", "BMW X7", "BMW M4", "BMW iX1", "iX xDRIVE50", "BMW i4", "BMW i7", "BMW i7 M70 xDRIVE", "BMW i5", "BMW X1", "X3", "X5", "M2", "M340i", "Z4", "XM", "7 Series", "5 Series", "3 Series"],
+    "mercedes": ["Mercedes-Benz S-Class", "Mercedes-Benz E-Class", "Mercedes-Benz G63", "Mercedes-Benz AMG GT", "A Class", "C Class", "EQS", "EQA", "EQB", "EQE", "GLA", "GLC", "GLE", "GLS", "CLE Cabriolet"],
+    "audi": ["RS7", "Q8", "e-tron GT", "Q7", "RSQ8", "A4", "A5", "A6", "Q3", "Q5"],
+    "ferrari": ["SF90 Stradale", "812", "F8 Tributo", "Roma", "296 GT", "Purosangue", "12Cilindri", "Daytona", "Monza", "F80", "F50", "F40", "GTO", "LaFerrari", "Enzo Ferrari"],
+    "lamborghini": ["Temerario", "Urus", "Aventador", "Huracan", "Revuelto"],
+    "bentley": ["Continental GT", "Bentayaga", "GTC", "Flying Spur"],
+    "aston-martin": ["DB12", "Valhalla", "Valkyrie", "Vantage", "Vanquish", "DBX", "Valour", "Valiant"],
+    "mclaren": ["McLaren P1", "McLaren GT", "McLaren Artura", "McLaren 675LT", "McLaren 600LT", "McLaren 720S", "McLaren Senna", "McLaren 765LT", "750S", "Elva", "Speedtail", "570S", "570GT", "540C", "650S", "12C", "F1"],
+    "porsche": ["Cayenne", "Macan", "718", "911", "Taycan", "Panamera"]
+  };
 
-    brandSelect.addEventListener('change', () => {
-      const selectedBrand = brandSelect.value;
-      const models = carOptions[selectedBrand] || [];
-      carSelect.innerHTML = '<option disabled selected>Choose a car</option>';
+  const brandSelect = document.getElementById('brand');
+  const carSelect = document.getElementById('car');
+
+  brandSelect.addEventListener('change', () => {
+    const selectedBrand = brandSelect.value;
+    const models = carOptions[selectedBrand] || [];
+
+    // Clear existing options
+    carSelect.innerHTML = '<option value="" disabled selected>Choose a car</option>';
+
+    // Populate with new options
+    if (models.length > 0) {
       models.forEach(model => {
         const option = document.createElement('option');
-        option.value = model.toLowerCase().replace(/\s+/g, '-');
+        option.value = model.toLowerCase().replace(/\s+/g, '-'); // Create a slug-like value
         option.textContent = model;
         carSelect.appendChild(option);
       });
-    });
-  </script>
-</section>
+      carSelect.disabled = false; // Enable car dropdown
+    } else {
+      carSelect.disabled = true; // Disable if no models
+    }
+  });
 
+  // Optional: Add form submission handling (placeholder)
+  document.getElementById('test-drive-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Test Drive Scheduled! (This is a placeholder. Implement backend submission.)');
+    // Here you would typically send the form data to your Spring Boot backend
+    // using fetch or XMLHttpRequest.
+    // Example:
+    // const formData = new FormData(e.target);
+    // fetch('/api/test-drive/schedule', {
+    //   method: 'POST',
+    //   body: JSON.stringify(Object.fromEntries(formData)),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // }).then(response => response.json())
+    //   .then(data => console.log(data))
+    //   .catch(error => console.error('Error:', error));
+  });
+</script>
 </body>
 </html>
