@@ -10,7 +10,7 @@
   <style>
     body {
       font-family: 'Outfit', sans-serif;
-      background-color: #1c1c1c; /* Charcoal Black */
+      background-color: #1c1c1c;
     }
     .card {
       background-color: #0a0a0a;
@@ -34,10 +34,10 @@
       background-color: #e6c200;
     }
     .section-title {
-      font-size: 2.25rem; /* text-4xl */
-      font-weight: 700; /* font-bold */
+      font-size: 2.25rem;
+      font-weight: 700;
       color: #FFD700;
-      margin-bottom: 1.5rem; /* mb-6 */
+      margin-bottom: 1.5rem;
       text-align: center;
     }
     .hero-section {
@@ -136,38 +136,8 @@
           <a href="/Test_drive.html" class="gold-bg text-[#0a0a0a] font-semibold py-2 px-5 rounded-full hover:gold-bg transition mt-6 inline-block">Schedule New Test Drive</a>
         </section>
 
-        <!-- Recent Activity / Notifications -->
-        <section class="card p-8 rounded-lg shadow-lg">
-          <h3 class="text-2xl font-bold gold-text mb-5 flex items-center gap-3"><i class="ph ph-activity text-3xl"></i> Recent Activity</h3>
-          <ul id="activityList" class="space-y-4 text-gray-300">
-            <li class="flex items-start gap-3">
-              <i class="ph ph-check-circle text-xl text-green-400 mt-1"></i>
-              <div>
-                <p class="font-semibold text-white">Test Drive Confirmed</p>
-                <p class="text-sm text-gray-400">Your test drive for the <span class="gold-text">Porsche 911</span> on <span class="text-white">2024-07-20</span> has been confirmed.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <i class="ph ph-star text-xl gold-text mt-1"></i>
-              <div>
-                <p class="font-semibold text-white">New Favorite Added</p>
-                <p class="text-sm text-gray-400">You added the <span class="gold-text">McLaren 720S</span> to your favorites.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <i class="ph ph-bell-ringing text-xl text-blue-400 mt-1"></i>
-              <div>
-                <p class="font-semibold text-white">New Offer Available</p>
-                <p class="text-sm text-gray-400">Exclusive financing options for <span class="gold-text">Mercedes-Benz S-Class</span>.</p>
-              </div>
-            </li>
-          </ul>
-          <button class="border border-gray-500 text-gray-200 font-semibold py-2 px-5 rounded-full hover:border-gold-text hover:text-gold-text transition mt-6">View All Activity</button>
-        </section>
-
       </div>
 
-      <!-- Right Column (Recommendations, Exclusive Offers, Quick Links) -->
       <div class="lg:col-span-1 space-y-8">
 
         <!-- Personalized Recommendations -->
@@ -200,22 +170,6 @@
             </div>
           </div>
           <button class="border border-gray-500 text-gray-200 font-semibold py-2 px-5 rounded-full hover:border-gold-text hover:text-gold-text transition mt-6 w-full">View More Recommendations</button>
-        </section>
-
-        <!-- Exclusive Offers -->
-        <section class="card p-8 rounded-lg shadow-lg">
-          <h3 class="text-2xl font-bold gold-text mb-5 flex items-center gap-3"><i class="ph ph-gift text-3xl"></i> Exclusive Offers</h3>
-          <div class="space-y-4">
-            <div class="bg-[#1a1a1a] p-4 rounded-md border border-gray-700">
-              <p class="font-semibold text-white">Special Financing on <span class="gold-text">Rolls-Royce Ghost</span></p>
-              <p class="text-sm text-gray-400">0.9% APR for 60 months. Limited time offer!</p>
-            </div>
-            <div class="bg-[#1a1a1a] p-4 rounded-md border border-gray-700">
-              <p class="font-semibold text-white">Complimentary Detailing for New <span class="gold-text">McLaren</span> Purchases</p>
-              <p class="text-sm text-gray-400">Receive a full premium detailing package.</p>
-            </div>
-          </div>
-          <button class="gold-bg text-[#0a0a0a] font-semibold py-2 px-5 rounded-full hover:gold-bg transition mt-6 w-full">View All Offers</button>
         </section>
 
         <!-- Quick Links -->
@@ -261,18 +215,15 @@
     const appointmentsList = document.getElementById('appointmentsList');
     const lastLoginDisplay = document.getElementById('lastLoginDisplay');
 
-    // Placeholder for dynamic counts
     const carsViewedCount = document.getElementById('carsViewedCount');
     const testDrivesCount = document.getElementById('testDrivesCount');
     const favoriteModelsCount = document.getElementById('favoriteModelsCount');
     const unreadNotificationsCount = document.getElementById('unreadNotificationsCount');
 
-    // Retrieve user info from localStorage
     const userName = localStorage.getItem('userName') || 'User';
     const userEmail = localStorage.getItem('userEmail') || 'N/A';
     const jwtToken = localStorage.getItem('jwtToken');
 
-    // If no token, redirect to login
     if (!jwtToken) {
       window.location.href = "/auth.html";
       return;
@@ -280,10 +231,10 @@
 
     userNameDisplay.textContent = userName;
     userEmailDisplay.textContent = userEmail;
-    lastLoginDisplay.textContent = new Date().toLocaleString(); // Set current time as last login
+    lastLoginDisplay.textContent = new Date().toLocaleString();
 
     // Placeholder for dynamic data (replace with actual API calls)
-    carsViewedCount.textContent = Math.floor(Math.random() * 50) + 10; // Random number for demo
+    carsViewedCount.textContent = Math.floor(Math.random() * 50) + 10;
     testDrivesCount.textContent = Math.floor(Math.random() * 5);
     favoriteModelsCount.textContent = Math.floor(Math.random() * 10);
     unreadNotificationsCount.textContent = Math.floor(Math.random() * 3);

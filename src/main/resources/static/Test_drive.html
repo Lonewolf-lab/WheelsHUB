@@ -228,22 +228,49 @@
   });
 
   // Optional: Add form submission handling (placeholder)
-  document.getElementById('test-drive-form').addEventListener('submit', (e) => {
+  document.getElementById('test-drive-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    alert('Test Drive Scheduled! (This is a placeholder. Implement backend submission.)');
-    // Here you would typically send the form data to your Spring Boot backend
-    // using fetch or XMLHttpRequest.
-    // Example:
-    // const formData = new FormData(e.target);
-    // fetch('/api/test-drive/schedule', {
-    //   method: 'POST',
-    //   body: JSON.stringify(Object.fromEntries(formData)),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // }).then(response => response.json())
-    //   .then(data => console.log(data))
-    //   .catch(error => console.error('Error:', error));
+
+    const form = e.target;
+    const formData = {
+      fullName: form.elements.name.value,
+      phoneNumber: form.elements.phone.value,
+      emailAddress: form.elements.email.value,
+      brand: form.elements.brand.value,
+      carModel: form.elements.car.value,
+      agreeTerms: form.elements.terms.checked
+    };
+
+    try {
+      const response = await fetch('/api/test-drive/schedule', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Test Drive Scheduled Successfully: ' + data.message);
+        form.reset(); // Clear the form on success
+        carSelect.disabled = true; // Disable car dropdown after reset
+        carSelect.innerHTML = '<option value="" disabled selected>Choose a car</option>'; // Reset car options
+      } else {
+        // Handle validation errors or other backend errors
+        let errorMessage = 'Failed to schedule test drive.';
+        if (data.message) {
+          errorMessage += '\n' + data.message;
+        } else if (data.errors && data.errors.length > 0) {
+          errorMessage += '\n' + data.errors.map(err => err.defaultMessage).join('\n');
+        }
+        alert(errorMessage);
+      }
+    } catch (error) {
+      console.error('Error scheduling test drive:', error);
+      alert('An error occurred while scheduling your test drive. Please try again.');
+    }
   });
 </script>
 </body>
