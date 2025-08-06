@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMW i7 M70 xDRIVE - Luxury Electric Sedan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #1c1c1c;
+        }
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            min-width: 100%;
+        }
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #666;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .indicator.active {
+            background-color: #FFD700;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black p-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="../index.html" class="text-[#FFD700] text-xl font-bold">Luxury Motors</a>
+            <a href="bmw.html" class="text-white hover:text-[#FFD700] transition-colors">← Back to BMW Collection</a>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto p-6">
+        <!-- Car Title and Price -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-[#FFD700] mb-4">BMW i7 M70 xDRIVE</h1>
+            <p class="text-2xl text-white mb-2">Starting at <span class="text-[#FFD700] font-bold">$168,000</span></p>
+            <p class="text-gray-400">Luxury Electric Sedan</p>
+        </div>
+
+        <!-- Image Carousel -->
+        <div class="carousel-container mb-8">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide">
+                    <img src="BMWs/m8.avif" alt="BMW i7 M70 xDRIVE Front View" class="w-full h-96 object-cover rounded-lg">
+                </div>
+                <div class="carousel-slide">
+                    <img src="BMWs/m8.avif" alt="BMW i7 M70 xDRIVE Side View" class="w-full h-96 object-cover rounded-lg">
+                </div>
+                <div class="carousel-slide">
+                    <img src="BMWs/m8.avif" alt="BMW i7 M70 xDRIVE Rear View" class="w-full h-96 object-cover rounded-lg">
+                </div>
+            </div>
+            <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75" onclick="previousSlide()">
+                <i class="ph ph-caret-left text-xl"></i>
+            </button>
+            <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75" onclick="nextSlide()">
+                <i class="ph ph-caret-right text-xl"></i>
+            </button>
+            <div class="carousel-indicators" id="carouselIndicators"></div>
+        </div>
+
+        <!-- Variants Section -->
+        <div class="bg-black rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-[#FFD700] mb-4">Available Variants</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-gray-800 rounded-lg p-4 cursor-pointer hover:bg-gray-700 transition-colors" onclick="selectVariant(this, 168000)">
+                    <h3 class="text-lg font-semibold text-white mb-2">i7 M70 xDRIVE</h3>
+                    <p class="text-[#FFD700] font-bold text-xl">$168,000</p>
+                    <p class="text-gray-400 text-sm">650 HP • 3.7s 0-60</p>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-4 cursor-pointer hover:bg-gray-700 transition-colors" onclick="selectVariant(this, 185000)">
+                    <h3 class="text-lg font-semibold text-white mb-2">i7 M70 xDRIVE Executive</h3>
+                    <p class="text-[#FFD700] font-bold text-xl">$185,000</p>
+                    <p class="text-gray-400 text-sm">650 HP • 3.7s 0-60</p>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-4 cursor-pointer hover:bg-gray-700 transition-colors" onclick="selectVariant(this, 200000)">
+                    <h3 class="text-lg font-semibold text-white mb-2">i7 M70 xDRIVE Ultimate</h3>
+                    <p class="text-[#FFD700] font-bold text-xl">$200,000</p>
+                    <p class="text-gray-400 text-sm">650 HP • 3.7s 0-60</p>
+                </div>
+            </div>
+            <div class="mt-4 text-center">
+                <p class="text-white">Selected Price: <span class="text-[#FFD700] font-bold text-xl" id="current-price">$168,000</span></p>
+            </div>
+        </div>
+
+        <!-- Specifications -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Performance -->
+            <div class="bg-black rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-[#FFD700] mb-4">Performance</h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Power Output</span>
+                        <span class="text-white font-semibold">650 HP</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Torque</span>
+                        <span class="text-white font-semibold">811 lb-ft</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">0-60 mph</span>
+                        <span class="text-white font-semibold">3.7 seconds</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Top Speed</span>
+                        <span class="text-white font-semibold">250 mph</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Range</span>
+                        <span class="text-white font-semibold">318 miles</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dimensions -->
+            <div class="bg-black rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-[#FFD700] mb-4">Dimensions</h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Length</span>
+                        <span class="text-white font-semibold">212.2 inches</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Width</span>
+                        <span class="text-white font-semibold">76.8 inches</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Height</span>
+                        <span class="text-white font-semibold">60.8 inches</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Wheelbase</span>
+                        <span class="text-white font-semibold">126.6 inches</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Cargo Space</span>
+                        <span class="text-white font-semibold">14.3 cu ft</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technology -->
+            <div class="bg-black rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-[#FFD700] mb-4">Technology</h2>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Battery Capacity</span>
+                        <span class="text-white font-semibold">105.7 kWh</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Charging Time</span>
+                        <span class="text-white font-semibold">34 min (10-80%)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Drive System</span>
+                        <span class="text-white font-semibold">Dual Motor AWD</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Infotainment</span>
+                        <span class="text-white font-semibold">iDrive 8.0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">Display</span>
+                        <span class="text-white font-semibold">14.9" + 12.3"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="bg-black rounded-lg p-6">
+                <h2 class="text-2xl font-bold text-[#FFD700] mb-4">Key Features</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-check-circle text-green-500"></i>
+                        <span class="text-white">Adaptive Air Suspension</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-check-circle text-green-500"></i>
+                        <span class="text-white">Laser Headlights</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-check-circle text-green-500"></i>
+                        <span class="text-white">BMW Live Cockpit Professional</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-check-circle text-green-500"></i>
+                        <span class="text-white">Gesture Control</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-check-circle text-green-500"></i>
+                        <span class="text-white">Wireless Charging</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-check-circle text-green-500"></i>
+                        <span class="text-white">Heads-up Display</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-check-circle text-green-500"></i>
+                        <span class="text-white">Surround View Camera</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-check-circle text-green-500"></i>
+                        <span class="text-white">Executive Lounge Seating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="text-center mt-12">
+            <a href="../Test_drive.html" class="bg-[#FFD700] text-black px-8 py-3 rounded-lg font-bold text-lg hover:bg-yellow-400 transition-colors inline-block">
+                Schedule Test Drive
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const track = document.getElementById('carouselTrack');
+        const indicators = document.getElementById('carouselIndicators');
+
+        // Create indicators
+        slides.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+            indicator.onclick = () => goToSlide(index);
+            indicators.appendChild(indicator);
+        });
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update indicators
+            document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function selectVariant(element, price) {
+            // Remove active class from all variants
+            document.querySelectorAll('.bg-gray-800').forEach(variant => {
+                variant.classList.remove('bg-gray-700');
+            });
+            
+            // Add active class to selected variant
+            element.classList.add('bg-gray-700');
+            
+            // Update price display
+            document.getElementById('current-price').textContent = `$${price.toLocaleString()}`;
+        }
+
+        // Auto-advance carousel
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BMW M8 - Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #1a1a1a 100%);
+            min-height: 100vh;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 500px;
+            position: relative;
+        }
+
+        .carousel-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1) 0%, transparent 50%, rgba(255, 215, 0, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .carousel-btn:hover {
+            background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .carousel-btn.prev {
+            left: 20px;
+        }
+
+        .carousel-btn.next {
+            right: 20px;
+        }
+
+        .variant-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .variant-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .variant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+            border-color: #FFD700;
+        }
+
+        .variant-card:hover::before {
+            left: 100%;
+        }
+
+        .variant-card.selected {
+            border: 2px solid #FFD700;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, #000000 100%);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .spec-category {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spec-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .spec-category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .spec-category:hover::before {
+            transform: scaleX(1);
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+            transition: all 0.2s ease;
+        }
+
+        .spec-item:hover {
+            padding-left: 10px;
+            color: #FFD700;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .indicator.active {
+            background: #FFD700;
+            transform: scale(1.2);
+            border-color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .indicator:hover {
+            background: #FFA500;
+            transform: scale(1.1);
+        }
+
+        /* Header enhancements */
+        header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Simple title styling */
+        .car-title {
+            color: #FFD700;
+        }
+
+        /* Price styling */
+        .price-display {
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Section titles */
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+
+<!-- Header -->
+<header class="p-6 flex justify-between items-center">
+    <h1 class="text-4xl font-bold car-title">BMW M8</h1>
+    <div class="text-right">
+        <p class="text-2xl font-bold price-display" id="current-price">$135,000</p>
+        <p class="text-sm text-gray-300">Starting Price</p>
+    </div>
+</header>
+
+<div class="max-w-7xl mx-auto p-6">
+
+    <!-- Image Carousel -->
+    <section class="mb-12">
+        <div class="carousel-container">
+            <div class="carousel-track" id="carousel-track">
+                <div class="carousel-slide">
+                    <img src="BMWs/m8.avif" alt="BMW M8 Front View" class="w-full h-full object-cover">
+                </div>
+                <div class="carousel-slide">
+                    <img src="BMWs/m8.avif" alt="BMW M8 Side View" class="w-full h-full object-cover">
+                </div>
+                <div class="carousel-slide">
+                    <img src="BMWs/m8.avif" alt="BMW M8 Interior" class="w-full h-full object-cover">
+                </div>
+                <div class="carousel-slide">
+                    <img src="BMWs/m8.avif" alt="BMW M8 Rear View" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <button class="carousel-btn prev" onclick="previousSlide()">
+                <i class="ph ph-caret-left"></i>
+            </button>
+            <button class="carousel-btn next" onclick="nextSlide()">
+                <i class="ph ph-caret-right"></i>
+            </button>
+        </div>
+
+        <div class="carousel-indicators" id="indicators"></div>
+    </section>
+
+    <!-- Variants Section -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-bold text-[#FFD700] mb-8 text-center section-title">Available Variants</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div class="variant-card rounded-lg p-6 selected" onclick="selectVariant(this, 135000)">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-3">M8 Competition</h3>
+                <p class="text-2xl font-bold text-white mb-2">$135,000</p>
+                <div class="text-sm text-gray-300 space-y-2">
+                    <p><i class="ph ph-engine text-[#FFD700]"></i> 4.4L Twin-Turbo V8</p>
+                    <p><i class="ph ph-lightning text-[#FFD700]"></i> 617 HP / 553 lb-ft</p>
+                    <p><i class="ph ph-car text-[#FFD700]"></i> AWD</p>
+                </div>
+            </div>
+
+            <div class="variant-card rounded-lg p-6" onclick="selectVariant(this, 130000)">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-3">M8 Base</h3>
+                <p class="text-2xl font-bold text-white mb-2">$130,000</p>
+                <div class="text-sm text-gray-300 space-y-2">
+                    <p><i class="ph ph-engine text-[#FFD700]"></i> 4.4L Twin-Turbo V8</p>
+                    <p><i class="ph ph-lightning text-[#FFD700]"></i> 617 HP / 553 lb-ft</p>
+                    <p><i class="ph ph-car text-[#FFD700]"></i> AWD</p>
+                </div>
+            </div>
+
+            <div class="variant-card rounded-lg p-6" onclick="selectVariant(this, 175000)">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-3">M8 Competition Convertible</h3>
+                <p class="text-2xl font-bold text-white mb-2">$175,000</p>
+                <div class="text-sm text-gray-300 space-y-2">
+                    <p><i class="ph ph-engine text-[#FFD700]"></i> 4.4L Twin-Turbo V8</p>
+                    <p><i class="ph ph-lightning text-[#FFD700]"></i> 617 HP / 553 lb-ft</p>
+                    <p><i class="ph ph-car text-[#FFD700]"></i> AWD</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Specifications Section -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-bold text-[#FFD700] mb-8 text-center section-title">Complete Specifications</h2>
+
+        <div class="spec-grid">
+
+            <!-- Engine & Performance -->
+            <div class="spec-category">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 flex items-center gap-2">
+                    <i class="ph ph-engine"></i> Engine & Performance
+                </h3>
+                <div class="spec-item">
+                    <span class="text-gray-300">Engine Type</span>
+                    <span class="font-semibold">4.4L Twin-Turbo V8</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Horsepower</span>
+                    <span class="font-semibold">617 HP</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Torque</span>
+                    <span class="font-semibold">553 lb-ft</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">0-60 mph</span>
+                    <span class="font-semibold">3.0 seconds</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Top Speed</span>
+                    <span class="font-semibold">190 mph</span>
+                </div>
+            </div>
+
+            <!-- Transmission & Drivetrain -->
+            <div class="spec-category">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 flex items-center gap-2">
+                    <i class="ph ph-gear-six"></i> Transmission & Drivetrain
+                </h3>
+                <div class="spec-item">
+                    <span class="text-gray-300">Transmission</span>
+                    <span class="font-semibold">8-Speed Automatic</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Drivetrain</span>
+                    <span class="font-semibold">AWD</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Differential</span>
+                    <span class="font-semibold">M Active Differential</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Launch Control</span>
+                    <span class="font-semibold">Standard</span>
+                </div>
+            </div>
+
+            <!-- Dimensions -->
+            <div class="spec-category">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 flex items-center gap-2">
+                    <i class="ph ph-ruler"></i> Dimensions
+                </h3>
+                <div class="spec-item">
+                    <span class="text-gray-300">Length</span>
+                    <span class="font-semibold">198.8 in</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Width</span>
+                    <span class="font-semibold">76.1 in</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Height</span>
+                    <span class="font-semibold">54.8 in</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Wheelbase</span>
+                    <span class="font-semibold">117.9 in</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Curb Weight</span>
+                    <span class="font-semibold">4,478 lbs</span>
+                </div>
+            </div>
+
+            <!-- Fuel Economy -->
+            <div class="spec-category">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 flex items-center gap-2">
+                    <i class="ph ph-drop"></i> Fuel Economy
+                </h3>
+                <div class="spec-item">
+                    <span class="text-gray-300">City MPG</span>
+                    <span class="font-semibold">15 mpg</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Highway MPG</span>
+                    <span class="font-semibold">22 mpg</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Combined MPG</span>
+                    <span class="font-semibold">18 mpg</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Fuel Tank</span>
+                    <span class="font-semibold">18.6 gallons</span>
+                </div>
+            </div>
+
+            <!-- Suspension & Brakes -->
+            <div class="spec-category">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 flex items-center gap-2">
+                    <i class="ph ph-car-profile"></i> Suspension & Brakes
+                </h3>
+                <div class="spec-item">
+                    <span class="text-gray-300">Front Suspension</span>
+                    <span class="font-semibold">Adaptive M Suspension</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Rear Suspension</span>
+                    <span class="font-semibold">Adaptive M Suspension</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Front Brakes</span>
+                    <span class="font-semibold">15.6" M Compound Discs</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Rear Brakes</span>
+                    <span class="font-semibold">15.7" M Compound Discs</span>
+                </div>
+            </div>
+
+            <!-- Technology -->
+            <div class="spec-category">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 flex items-center gap-2">
+                    <i class="ph ph-monitor"></i> Technology
+                </h3>
+                <div class="spec-item">
+                    <span class="text-gray-300">Infotainment</span>
+                    <span class="font-semibold">12.3" iDrive 8</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Digital Cluster</span>
+                    <span class="font-semibold">12.3" Curved Display</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Sound System</span>
+                    <span class="font-semibold">Bowers & Wilkins</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Connectivity</span>
+                    <span class="font-semibold">BMW ConnectedDrive</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+    const track = document.getElementById('carousel-track');
+    const indicatorsContainer = document.getElementById('indicators');
+
+    // Create indicators
+    for (let i = 0; i < totalSlides; i++) {
+        const indicator = document.createElement('div');
+        indicator.className = 'indicator';
+        if (i === 0) indicator.classList.add('active');
+        indicator.onclick = () => goToSlide(i);
+        indicatorsContainer.appendChild(indicator);
+    }
+
+    function updateCarousel() {
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        // Update indicators
+        document.querySelectorAll('.indicator').forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
+    }
+
+    function previousSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
+
+    // Auto-play carousel
+    setInterval(nextSlide, 5000);
+
+    // Variant selection
+    function selectVariant(element, price) {
+        document.querySelectorAll('.variant-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+
+        // Add selected class to clicked variant
+        element.classList.add('selected');
+
+        // Update price in header
+        document.getElementById('current-price').textContent = `$${price.toLocaleString()}`;
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') previousSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+    });
+</script>
+
+</body>
+</html> 

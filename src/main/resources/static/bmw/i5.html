@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BMW i5 - Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #1a1a1a 100%);
+            min-height: 100vh;
+        }
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            height: 500px;
+            position: relative;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+        .carousel-btn.prev {
+            left: 16px;
+            right: auto;
+        }
+        .carousel-btn.next {
+            right: 16px;
+            left: auto;
+        }
+        .variant-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+        .variant-card.selected {
+            border: 2px solid #FFD700;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, #000000 100%);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .spec-category {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+        }
+        .car-title { color: #FFD700; }
+        .price-display { color: #FFD700; }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+
+<header class="p-6 flex justify-between items-center">
+    <h1 class="text-4xl font-bold car-title">BMW i5</h1>
+    <div class="text-right">
+        <p class="text-2xl font-bold price-display" id="current-price">$64,000</p>
+        <p class="text-sm text-gray-300">Starting Price</p>
+    </div>
+</header>
+
+<div class="max-w-7xl mx-auto p-6">
+
+    <section class="mb-12">
+        <div class="carousel-container">
+
+            <button class="carousel-btn prev" onclick="previousSlideI5()">
+                <i class="ph ph-caret-left"></i>
+            </button>
+
+            <button class="carousel-btn next" onclick="nextSlideI5()">
+                <i class="ph ph-caret-right"></i>
+            </button>
+
+            <div class="carousel-track" id="carousel-track-i5">
+                <div class="carousel-slide">
+                    <img src="BMWs/i5_1.jpg" alt="BMW i5 Front View" class="w-full h-full object-cover" />
+                </div>
+                <div class="carousel-slide">
+                    <img src="BMWs/i5_2.jpg" alt="BMW i5 Side View" class="w-full h-full object-cover" />
+                </div>
+                <div class="carousel-slide">
+                    <img src="BMWs/i5_3.jpg" alt="BMW i5 Interior" class="w-full h-full object-cover" />
+                </div>
+                <div class="carousel-slide">
+                    <img src="BMWs/i5_4.jpg" alt="BMW i5 Rear View" class="w-full h-full object-cover" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-12">
+        <h2 class="text-3xl font-bold text-[#FFD700] mb-8 text-center section-title">Available Variants</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="variant-card rounded-lg p-6 selected" onclick="selectVariantI5(this, 64000)">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-3">i5 eDrive50</h3>
+                <p class="text-2xl font-bold text-white mb-2">$64,000</p>
+                <div class="text-sm text-gray-300 space-y-2">
+                    <p><i class="ph ph-lightning text-[#FFD700]"></i> Dual Motor Electric</p>
+                    <p><i class="ph ph-lightning text-[#FFD700]"></i> 523 HP</p>
+                    <p><i class="ph ph-car text-[#FFD700]"></i> AWD</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-12">
+        <h2 class="text-3xl font-bold text-[#FFD700] mb-8 text-center section-title">Complete Specifications</h2>
+        <div class="spec-grid">
+            <div class="spec-category">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 flex items-center gap-2">
+                    <i class="ph ph-lightning"></i> Electric Performance
+                </h3>
+                <div class="spec-item">
+                    <span class="text-gray-300">Motor Type</span>
+                    <span class="font-semibold">Dual Motor Electric</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Horsepower</span>
+                    <span class="font-semibold">523 HP</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">0-60 mph</span>
+                    <span class="font-semibold">3.9 seconds</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Range</span>
+                    <span class="font-semibold">300 miles</span>
+                </div>
+            </div>
+
+            <div class="spec-category">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 flex items-center gap-2">
+                    <i class="ph ph-battery"></i> Battery & Charging
+                </h3>
+                <div class="spec-item">
+                    <span class="text-gray-300">Battery Capacity</span>
+                    <span class="font-semibold">100 kWh</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Charging Time (DC)</span>
+                    <span class="font-semibold">32 min (10-80%)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Charging Time (AC)</span>
+                    <span class="font-semibold">8 hours</span>
+                </div>
+            </div>
+
+            <div class="spec-category">
+                <h3 class="text-xl font-bold text-[#FFD700] mb-4 flex items-center gap-2">
+                    <i class="ph ph-ruler"></i> Dimensions
+                </h3>
+                <div class="spec-item">
+                    <span class="text-gray-300">Length</span>
+                    <span class="font-semibold">190.3 in</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Width</span>
+                    <span class="font-semibold">77.5 in</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Height</span>
+                    <span class="font-semibold">62.9 in</span>
+                </div>
+                <div class="spec-item">
+                    <span class="text-gray-300">Wheelbase</span>
+                    <span class="font-semibold">117 in</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    // Carousel control variables for BMW i5
+    let currentSlideI5 = 0;
+    const slidesI5 = document.querySelectorAll('#carousel-track-i5 .carousel-slide');
+    const totalSlidesI5 = slidesI5.length;
+    const trackI5 = document.getElementById('carousel-track-i5');
+
+    function updateCarouselI5() {
+        trackI5.style.transform = `translateX(-${currentSlideI5 * 100}%)`;
+    }
+
+    function nextSlideI5() {
+        currentSlideI5 = (currentSlideI5 + 1) % totalSlidesI5;
+        updateCarouselI5();
+    }
+
+    function previousSlideI5() {
+        currentSlideI5 = (currentSlideI5 - 1 + totalSlidesI5) % totalSlidesI5;
+        updateCarouselI5();
+    }
+
+    // Auto-advance carousel every 5 seconds
+    setInterval(nextSlideI5, 5000);
+
+    // Variant selection updates highlight and price
+    function selectVariantI5(element, price) {
+        document.querySelectorAll('.variant-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        element.classList.add('selected');
+        document.getElementById('current-price').textContent = `$${price.toLocaleString()}`;
+    }
+</script>
+
+</body>
+</html>
