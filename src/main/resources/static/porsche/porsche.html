@@ -12,16 +12,26 @@
       font-family: 'Outfit', sans-serif;
       background-color: #1c1c1c; /* Charcoal Black */
     }
+    /* Make the whole card clickable with no default blue underline */
+    a.card-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+    a.card-link:hover {
+      text-decoration: none;
+    }
   </style>
 </head>
 <body class="text-white p-6">
 
-  <h1 class="text-3xl font-bold text-[#FFD700] mb-10 text-center">Porsche Collection</h1>
+<h1 class="text-3xl font-bold text-[#FFD700] mb-10 text-center">Porsche Collection</h1>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
-    <!-- Car 1: Porsche 911-->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
+  <!-- Car 1: Porsche 911-->
+  <a href="porche911.html" class="card-link">
+    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200">
       <img src="Porsches/porsche 911 turbo s.jpg" alt="Porsche 911" class="w-full h-64 object-cover">
       <div class="p-5">
         <div class="flex justify-between items-center mb-3">
@@ -36,9 +46,11 @@
         </div>
       </div>
     </div>
+  </a>
 
-    <!-- Car 2: Porsche Taycan-->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
+  <!-- Car 2: Porsche Taycan-->
+  <a href="taycan.html" class="card-link">
+    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200">
       <img src="Porsches/porsche tycan turbo s.jpeg" alt="Porsche Taycan" class="w-full h-64 object-cover">
       <div class="p-5">
         <div class="flex justify-between items-center mb-3">
@@ -53,9 +65,11 @@
         </div>
       </div>
     </div>
+  </a>
 
-    <!-- Car 3: Porsche Panamera-->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
+  <!-- Car 3: Porsche Panamera-->
+  <a href="panamera.html" class="card-link">
+    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200">
       <img src="Porsches/panamera.jpg" alt="Porsche Panamera" class="w-full h-64 object-cover">
       <div class="p-5">
         <div class="flex justify-between items-center mb-3">
@@ -70,9 +84,11 @@
         </div>
       </div>
     </div>
+  </a>
 
-    <!-- Car 4: Porsche Cayenne Turbo GT -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
+  <!-- Car 4: Porsche Cayenne Turbo GT -->
+  <a href="canyenne.html" class="card-link">
+    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200">
       <img src="Porsches/cayenne.webp" alt="Porsche Cayenne" class="w-full h-64 object-cover">
       <div class="p-5">
         <div class="flex justify-between items-center mb-3">
@@ -87,7 +103,8 @@
         </div>
       </div>
     </div>
+  </a>
 
-  </div>
+</div>
 </body>
 </html>

@@ -14,13 +14,42 @@
     }
   </style>
 </head>
-<body class="text-white p-6">
+<body class="text-white p-6 pt-32">
+
+  <!-- Header -->
+  <header class="bg-[#0a0a0a] p-4 flex flex-col md:flex-row justify-between items-center shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="flex items-center gap-4 mb-4 md:mb-0">
+      <img src="../photos/wheelshub logo no bg.png" alt="WheelsHub Logo" class="h-12">
+      <span class="text-3xl font-bold text-[#FFD700]">WheelsHub</span>
+    </div>
+    <nav class="flex items-center space-x-6 text-lg">
+      <ul class="flex space-x-6">
+        <li><a href="../site.html" class="text-gray-300 hover:text-[#FFD700] transition">Home</a></li>
+        <li><a href="../brands.html" class="text-gray-300 hover:text-[#FFD700] transition">Brands</a></li>
+        <li><a href="../Test_drive.html" class="text-gray-300 hover:text-[#FFD700] transition">Test Drive</a></li>
+        <li><a href="../about.html" class="text-gray-300 hover:text-[#FFD700] transition">About Us</a></li>
+      </ul>
+      <!-- Search Bar -->
+      <div class="relative">
+        <input
+                type="search"
+                id="searchInput"
+                placeholder="Search Bentley cars..."
+                class="bg-[#1a1a1a] text-white rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-[#FFD700] w-48 md:w-64"
+        />
+        <button onclick="searchCars()" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#FFD700]">
+          <i class="ph ph-magnifying-glass text-xl"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
 
   <h1 class="text-3xl font-bold text-[#FFD700] mb-10 text-center">Bentley Collection</h1>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
     <!-- Car 1: Continental GT -->
+    <a href="continentley%20gt.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Bentleys/continental gt.webp" alt="Bentley Continental GT" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -36,8 +65,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 2: Flying Spur -->
+    <a href="flying%20spur.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Bentleys/flying spur.avif" alt="Bentley Flying Spur" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -53,8 +84,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 3: Bentayga -->
+    <a href="bentyaga.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Bentleys/bentayga.jpg" alt="Bentley Bentayga" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -70,8 +103,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 4: Continental GTC -->
+    <a href="continental%20gtc.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Bentleys/continental gtc.jpg" alt="Bentley Continental GTC" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -87,7 +122,55 @@
         </div>
       </div>
     </div>
+    </a>
 
   </div>
+
+  <!-- Search Functionality -->
+  <script>
+    function searchCars() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+      const carCards = document.querySelectorAll('.grid > div');
+      let foundCars = 0;
+
+      carCards.forEach(card => {
+        const carTitle = card.querySelector('h2').textContent.toLowerCase();
+        
+        // Only show cars that match the search term exactly or contain the search term
+        if (searchTerm === '' || carTitle.includes(searchTerm)) {
+          card.style.display = 'block';
+          foundCars++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Show message if no cars found
+      const existingMessage = document.getElementById('noResultsMessage');
+      if (existingMessage) {
+        existingMessage.remove();
+      }
+
+      if (foundCars === 0 && searchTerm !== '') {
+        const message = document.createElement('div');
+        message.id = 'noResultsMessage';
+        message.className = 'col-span-full text-center text-[#FFD700] text-xl font-semibold py-8';
+        message.textContent = 'No Results Found';
+        document.querySelector('.grid').appendChild(message);
+      }
+    }
+
+    // Allow search on Enter key press
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchCars();
+      }
+    });
+
+    // Real-time search as user types
+    document.getElementById('searchInput').addEventListener('input', function() {
+      searchCars();
+    });
+  </script>
 </body>
 </html>

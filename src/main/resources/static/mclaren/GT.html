@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>McLaren GT - Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap"
+            rel="stylesheet"
+    />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        /* Consistent style as above pages */
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 24px 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+        .car-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FFD700;
+        }
+        .price-display {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.35);
+            text-align: right;
+        }
+        .price-subtitle {
+            color: #ccc;
+            font-size: 0.9rem;
+            text-align: right;
+            margin-top: 4px;
+        }
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            max-width: 1200px;
+            margin: 32px auto 56px;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            height: 500px;
+            position: relative;
+        }
+        .carousel-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(255,215,0,0.1) 0%, transparent 50%, rgba(255,215,0,0.1) 100%);
+            pointer-events: none;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            border-radius: 12px;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+            transition: all 0.3s ease;
+        }
+        .carousel-btn:hover {
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.6);
+        }
+        .carousel-btn.prev { left: 20px; }
+        .carousel-btn.next { right: 20px; }
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #666;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .indicator.active {
+            background: #FFD700;
+            border-color: #FFD700;
+            transform: scale(1.25);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+        .indicator:hover {
+            background: #FFA500;
+            transform: scale(1.1);
+        }
+        .variants-section,
+        .specs-section {
+            max-width: 1200px;
+            margin: 0 auto 64px;
+            padding: 0 24px;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FFD700;
+            text-align: center;
+            margin-bottom: 36px;
+            position: relative;
+        }
+        .section-title::after {
+            content: "";
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -12px;
+            border-radius: 3px;
+        }
+
+        .variant-card {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .variant-card:hover {
+            border-color: #FFD700;
+            box-shadow: 0 15px 35px rgba(255,215,0,0.5);
+            transform: translateY(-5px);
+        }
+        .variant-card.selected {
+            border-color: #FFD700;
+            border-width: 2px;
+            box-shadow: 0 0 30px rgba(255,215,0,0.4);
+            background: linear-gradient(135deg, rgba(255,215,0,0.12) 0%, #000000 100%);
+        }
+        .variant-card h3 {
+            color: #FFD700;
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-size: 1.5rem;
+        }
+        .variant-card p.price {
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: white;
+            margin-bottom: 16px;
+        }
+        .variant-details {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .variant-details p {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        .variant-details i {
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+
+        .spec-grid {
+            display: grid;
+            gap: 28px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        .spec-category {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            border-radius: 12px;
+            padding: 28px;
+            border: 1px solid #333;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .spec-category:hover {
+            border-color: rgba(255,215,0,0.5);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transform: translateY(-4px);
+        }
+        .spec-category::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: center;
+        }
+        .spec-category:hover::before {
+            transform: scaleX(1);
+        }
+        .spec-category h3 {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #FFD700;
+        }
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #333;
+            padding: 10px 0;
+            font-size: 0.95rem;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+        }
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+        .spec-item:hover {
+            color: #FFD700;
+            padding-left: 10px;
+        }
+        .spec-item span {
+            font-weight: 600;
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+            header > div:last-child {
+                width: 100%;
+                text-align: center;
+            }
+            .carousel-slide, .carousel-slide img {
+                height: 350px;
+            }
+            .price-display {
+                font-size: 1.5rem;
+            }
+            .car-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1 class="car-title">McLaren GT</h1>
+    <div>
+        <p class="price-display" id="current-price">$208,490</p>
+        <p class="price-subtitle">Starting Price</p>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-6">
+    <!-- Carousel -->
+    <section class="carousel-container">
+        <div class="carousel-track" id="carousel-track-gt">
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/seed/mclarengtfront/1200/500.jpg" alt="McLaren GT Front View" />
+            </div>
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/seed/mclarengtside/1200/500.jpg" alt="McLaren GT Side View" />
+            </div>
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/seed/mclarengtinterior/1200/500.jpg" alt="McLaren GT Interior" />
+            </div>
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/seed/mclarengtrear/1200/500.jpg" alt="McLaren GT Rear View" />
+            </div>
+        </div>
+        <button class="carousel-btn prev" onclick="previousSlideGT()"><i class="ph ph-caret-left"></i></button>
+        <button class="carousel-btn next" onclick="nextSlideGT()"><i class="ph ph-caret-right"></i></button>
+        <div class="carousel-indicators" id="indicators-gt"></div>
+    </section>
+
+    <!-- Variants -->
+    <section class="variants-section">
+        <h2 class="section-title">Available Variants</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <div class="variant-card selected" onclick="selectVariantGT(this, 208490)">
+                <h3>GT Coupe</h3>
+                <p class="price">$208,490</p>
+                <div class="variant-details">
+                    <p><i class="ph ph-engine"></i> 4.0L Twin-Turbo V8</p>
+                    <p><i class="ph ph-horse"></i> 612 HP</p>
+                    <p><i class="ph ph-gauge"></i> 0-60 mph in 3.1s</p>
+                    <p><i class="ph ph-car"></i> RWD</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications -->
+    <section class="specs-section">
+        <h2 class="section-title">Complete Specifications</h2>
+        <div class="spec-grid">
+            <div class="spec-category">
+                <h3><i class="ph ph-engine"></i> Engine & Performance</h3>
+                <div class="spec-item"><span>Engine</span><span>4.0L Twin-Turbocharged V8</span></div>
+                <div class="spec-item"><span>Power Output</span><span>612 HP @ 7,300 rpm</span></div>
+                <div class="spec-item"><span>Torque</span><span>465 lb-ft</span></div>
+                <div class="spec-item"><span>0-60 mph</span><span>3.1 seconds</span></div>
+                <div class="spec-item"><span>Top Speed</span><span>203 mph</span></div>
+            </div>
+            <div class="spec-category">
+                <h3><i class="ph ph-gear-six"></i> Transmission</h3>
+                <div class="spec-item"><span>Type</span><span>7-Speed Dual Clutch</span></div>
+                <div class="spec-item"><span>Drivetrain</span><span>Rear-Wheel Drive</span></div>
+            </div>
+            <div class="spec-category">
+                <h3><i class="ph ph-ruler"></i> Dimensions</h3>
+                <div class="spec-item"><span>Length</span><span>4,628 mm</span></div>
+                <div class="spec-item"><span>Width</span><span>2,151 mm (w/mirrors)</span></div>
+                <div class="spec-item"><span>Height</span><span>1,221 mm</span></div>
+                <div class="spec-item"><span>Wheelbase</span><span>2,670 mm</span></div>
+                <div class="spec-item"><span>Curb Weight</span><span>1,530 kg</span></div>
+            </div>
+            <div class="spec-category">
+                <h3><i class="ph ph-laptop"></i> Interior & Technology</h3>
+                <div class="spec-item"><span>Infotainment</span><span>7.0" Touchscreen</span></div>
+                <div class="spec-item"><span>Audio</span><span>Premium Sound System</span></div>
+                <div class="spec-item"><span>Connectivity</span><span>Apple CarPlay, Android Auto</span></div>
+            </div>
+            <div class="spec-category">
+                <h3><i class="ph ph-star"></i> Features & Options</h3>
+                <div class="spec-item"><span>Seats</span><span>2 Lux Seats</span></div>
+                <div class="spec-item"><span>Body</span><span>Carbon Fiber Monocoque</span></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    let currentSlideGT = 0;
+    const trackGT = document.getElementById('carousel-track-gt');
+    const slidesGT = document.querySelectorAll('#carousel-track-gt .carousel-slide');
+    const totalSlidesGT = slidesGT.length;
+    const indicatorsGT = document.getElementById('indicators-gt');
+
+    function createIndicatorsGT() {
+        for (let i = 0; i < totalSlidesGT; i++) {
+            const indicator = document.createElement('div');
+            indicator.className = 'indicator';
+            if (i === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => goToSlideGT(i));
+            indicatorsGT.appendChild(indicator);
+        }
+    }
+
+    function updateCarouselGT() {
+        trackGT.style.transform = `translateX(-${currentSlideGT * 100}%)`;
+        const indicators = document.querySelectorAll('#indicators-gt .indicator');
+        indicators.forEach((ind, idx) => {
+            ind.classList.toggle('active', idx === currentSlideGT);
+        });
+    }
+
+    function nextSlideGT() {
+        currentSlideGT = (currentSlideGT + 1) % totalSlidesGT;
+        updateCarouselGT();
+    }
+
+    function previousSlideGT() {
+        currentSlideGT = (currentSlideGT - 1 + totalSlidesGT) % totalSlidesGT;
+        updateCarouselGT();
+    }
+
+    function goToSlideGT(index) {
+        currentSlideGT = index;
+        updateCarouselGT();
+    }
+
+    createIndicatorsGT();
+    setInterval(nextSlideGT, 5000);
+
+    function selectVariantGT(el, price) {
+        document.querySelectorAll('.variant-card').forEach(card => card.classList.remove('selected'));
+        el.classList.add('selected');
+        document.getElementById('current-price').textContent = `$${price.toLocaleString()}`;
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') previousSlideGT();
+        if (e.key === 'ArrowRight') nextSlideGT();
+    });
+</script>
+</body>
+</html>

@@ -10,305 +10,247 @@
   <style>
     body {
       font-family: 'Outfit', sans-serif;
-      background-color: #1c1c1c; /* Charcoal Black */
+      background: #000; /* Primary: Black */
+    }
+    .highlight-gold { color: #FFD700; }
+    .bg-gold { background-color: #FFD700; }
+    .border-gold { border-color: #FFD700; }
+    .card-border {
+      border-width: 2px;
+      border-style: solid;
+      border-color: transparent;
+      transition: border-color 0.2s;
+    }
+    .card-border:hover, .card-border:focus-within {
+      border-color: #FFD700;
+    }
+    /* Gold to black button hover */
+    .btn-gold {
+      background: #FFD700;
+      color: #000;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-gold:hover, .btn-gold:focus {
+      background: #000;
+      color: #FFD700;
+      border: 2px solid #FFD700;
     }
   </style>
 </head>
-<body class="text-white p-6">
+<body class="text-white p-6 pt-32">
 
-  <h1 class="text-3xl font-bold text-[#FFD700] mb-10 text-center">McLaren Collection</h1>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-
-    <!-- McLaren 765LT -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/765LT.jpg" alt="McLaren 765LT" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren 765LT</h2>
-          <span class="text-white font-semibold text-lg">&#8377; 3.3cr</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 755 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.7s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed DCT</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren Senna -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/senna.jpg" alt="McLaren Senna" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren Senna</h2>
-          <span class="text-white font-semibold text-lg">&#8377; 8.58cr</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 800 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.7s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed DCT</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren 720S -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/720S.jpg" alt="McLaren 720S" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren 720S</h2>
-          <span class="text-white font-semibold text-lg">&#8377;2.58cr</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 710 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.8s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren 600LT -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/600LT.jpg" alt="McLaren 600LT" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren 600LT</h2>
-          <span class="text-white font-semibold text-lg">&#8377;2.1cr</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 592 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.9s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed DCT</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren 675LT -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/675LT.webp" alt="McLaren 675LT" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren 675LT</h2>
-          <span class="text-white font-semibold text-lg">$349,500</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 666 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.9s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren Artura -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/artura.avif" alt="McLaren Artura" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren Artura</h2>
-          <span class="text-white font-semibold text-lg">$237,500</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 671 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 3.0s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 8-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren GT -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/gt.webp" alt="McLaren GT" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren GT</h2>
-          <span class="text-white font-semibold text-lg">$208,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 612 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 3.1s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren P1 -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/P1.webp" alt="McLaren P1" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren P1</h2>
-          <span class="text-white font-semibold text-lg">$1,150,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 903 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.7s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed DCT</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren 750S -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/765LT.jpg" alt="McLaren 750S" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren 750S</h2>
-          <span class="text-white font-semibold text-lg">$350,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 750 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.7s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed DCT</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren Elva -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/senna.jpg" alt="McLaren Elva" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren Elva</h2>
-          <span class="text-white font-semibold text-lg">$1,700,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 804 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.8s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed DCT</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren Speedtail -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/720S.jpg" alt="McLaren Speedtail" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren Speedtail</h2>
-          <span class="text-white font-semibold text-lg">$2,250,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 1036 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.9s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> Hybrid</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren 570S -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/600LT.jpg" alt="McLaren 570S" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren 570S</h2>
-          <span class="text-white font-semibold text-lg">$200,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 562 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 3.1s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren 570GT -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/675LT.webp" alt="McLaren 570GT" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren 570GT</h2>
-          <span class="text-white font-semibold text-lg">$210,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 562 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 3.2s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren 540C -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/artura.avif" alt="McLaren 540C" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren 540C</h2>
-          <span class="text-white font-semibold text-lg">$180,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 533 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 3.4s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren 650S -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/gt.webp" alt="McLaren 650S" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren 650S</h2>
-          <span class="text-white font-semibold text-lg">$265,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 641 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.9s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren 12C -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/P1.webp" alt="McLaren 12C" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren 12C</h2>
-          <span class="text-white font-semibold text-lg">$240,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 616 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 3.0s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- McLaren F1 -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="McLarens/765LT.jpg" alt="McLaren F1" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">McLaren F1</h2>
-          <span class="text-white font-semibold text-lg">$20,000,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 618 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 3.2s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 6-Speed Manual</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
+<!-- Header -->
+<header class="bg-black p-4 flex flex-col md:flex-row justify-between items-center shadow-md fixed top-0 left-0 right-0 z-50 border-b border-gold">
+  <div class="flex items-center gap-4 mb-4 md:mb-0">
+    <img src="../photos/wheelshub logo no bg.png" alt="WheelsHub Logo" class="h-12">
+    <span class="text-3xl font-bold highlight-gold">WheelsHub</span>
   </div>
+  <nav class="flex items-center space-x-6 text-lg">
+    <ul class="flex space-x-6">
+      <li><a href="../site.html" class="text-gray-300 hover:text-[#FFD700] transition">Home</a></li>
+      <li><a href="../brands.html" class="text-gray-300 hover:text-[#FFD700] transition">Brands</a></li>
+      <li><a href="../Test_drive.html" class="text-gray-300 hover:text-[#FFD700] transition">Test Drive</a></li>
+      <li><a href="../about.html" class="text-gray-300 hover:text-[#FFD700] transition">About Us</a></li>
+    </ul>
+    <div class="relative">
+      <input
+              type="search"
+              id="searchInput"
+              placeholder="Search McLaren cars..."
+              class="bg-black text-white rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-[#FFD700] w-48 md:w-64 border border-gold"
+      />
+      <button onclick="searchCars()" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#FFD700]">
+        <i class="ph ph-magnifying-glass text-xl"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<h1 class="text-3xl font-bold highlight-gold mb-10 text-center">McLaren Collection</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+
+  <!-- 765LT -->
+  <a href="765LT.html" class="block card-border rounded-lg bg-black shadow-md overflow-hidden cursor-pointer hover:opacity-95 focus-within:opacity-95">
+    <img src="McLarens/765lt.jpg" alt="McLaren 765LT" class="w-full h-64 object-cover">
+    <div class="p-5">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold highlight-gold">McLaren 765LT</h2>
+        <span class="text-white font-semibold text-lg">$382,500</span>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="flex items-center gap-2"><i class="ph ph-engine highlight-gold"></i> 755 HP</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gauge highlight-gold"></i> 0-60 in 2.7s</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gear-six highlight-gold"></i> 7-Speed DCT</div>
+        <div class="flex items-center gap-2"><i class="ph ph-car highlight-gold"></i> RWD</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- Senna -->
+  <a href="senna.html" class="block card-border rounded-lg bg-black shadow-md overflow-hidden cursor-pointer hover:opacity-95 focus-within:opacity-95">
+    <img src="McLarens/senna.jpg" alt="McLaren Senna" class="w-full h-64 object-cover">
+    <div class="p-5">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold highlight-gold">McLaren Senna</h2>
+        <span class="text-white font-semibold text-lg">$1,000,000</span>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="flex items-center gap-2"><i class="ph ph-engine highlight-gold"></i> 800 HP</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gauge highlight-gold"></i> 0-62 in 2.8s</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gear-six highlight-gold"></i> 7-Speed DCT</div>
+        <div class="flex items-center gap-2"><i class="ph ph-car highlight-gold"></i> RWD</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- 720S -->
+  <a href="720S.html" class="block card-border rounded-lg bg-black shadow-md overflow-hidden cursor-pointer hover:opacity-95 focus-within:opacity-95">
+    <img src="McLarens/720s.jpg" alt="McLaren 720S" class="w-full h-64 object-cover">
+    <div class="p-5">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold highlight-gold">McLaren 720S</h2>
+        <span class="text-white font-semibold text-lg">$305,000</span>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="flex items-center gap-2"><i class="ph ph-engine highlight-gold"></i> 710 HP</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gauge highlight-gold"></i> 0-60 in 2.8s</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gear-six highlight-gold"></i> 7-Speed DCT</div>
+        <div class="flex items-center gap-2"><i class="ph ph-car highlight-gold"></i> RWD</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- 600LT -->
+  <a href="600LT.html" class="block card-border rounded-lg bg-black shadow-md overflow-hidden cursor-pointer hover:opacity-95 focus-within:opacity-95">
+    <img src="McLarens/600lt.jpg" alt="McLaren 600LT" class="w-full h-64 object-cover">
+    <div class="p-5">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold highlight-gold">McLaren 600LT</h2>
+        <span class="text-white font-semibold text-lg">$256,500</span>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="flex items-center gap-2"><i class="ph ph-engine highlight-gold"></i> 592 HP</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gauge highlight-gold"></i> 0-60 in 2.9s</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gear-six highlight-gold"></i> 7-Speed DCT</div>
+        <div class="flex items-center gap-2"><i class="ph ph-car highlight-gold"></i> RWD</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- Artura -->
+  <a href="artura.html" class="block card-border rounded-lg bg-black shadow-md overflow-hidden cursor-pointer hover:opacity-95 focus-within:opacity-95">
+    <img src="McLarens/artura.jpg" alt="McLaren Artura" class="w-full h-64 object-cover">
+    <div class="p-5">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold highlight-gold">McLaren Artura</h2>
+        <span class="text-white font-semibold text-lg">$237,500</span>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="flex items-center gap-2"><i class="ph ph-engine highlight-gold"></i> 671 HP</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gauge highlight-gold"></i> 0-60 in 3.0s</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gear-six highlight-gold"></i> 8-Speed DCT</div>
+        <div class="flex items-center gap-2"><i class="ph ph-car highlight-gold"></i> RWD • Hybrid</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- GT -->
+  <a href="GT.html" class="block card-border rounded-lg bg-black shadow-md overflow-hidden cursor-pointer hover:opacity-95 focus-within:opacity-95">
+    <img src="McLarens/gt.jpg" alt="McLaren GT" class="w-full h-64 object-cover">
+    <div class="p-5">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold highlight-gold">McLaren GT</h2>
+        <span class="text-white font-semibold text-lg">$208,490</span>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="flex items-center gap-2"><i class="ph ph-engine highlight-gold"></i> 612 HP</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gauge highlight-gold"></i> 0-60 in 3.1s</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gear-six highlight-gold"></i> 7-Speed DCT</div>
+        <div class="flex items-center gap-2"><i class="ph ph-car highlight-gold"></i> RWD</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- Speedtail -->
+  <a href="speedtail.html" class="block card-border rounded-lg bg-black shadow-md overflow-hidden cursor-pointer hover:opacity-95 focus-within:opacity-95">
+    <img src="McLarens/speedtail.jpg" alt="McLaren Speedtail" class="w-full h-64 object-cover">
+    <div class="p-5">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold highlight-gold">McLaren Speedtail</h2>
+        <span class="text-white font-semibold text-lg">$2,250,000</span>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="flex items-center gap-2"><i class="ph ph-engine highlight-gold"></i> 1,035 HP</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gauge highlight-gold"></i> 0-60 in 2.9s</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gear-six highlight-gold"></i> 7-Speed DCT</div>
+        <div class="flex items-center gap-2"><i class="ph ph-car highlight-gold"></i> RWD • Hybrid</div>
+      </div>
+    </div>
+  </a>
+
+  <!-- 570S -->
+  <a href="570S.html" class="block card-border rounded-lg bg-black shadow-md overflow-hidden cursor-pointer hover:opacity-95 focus-within:opacity-95">
+    <img src="McLarens/570s.jpg" alt="McLaren 570S" class="w-full h-64 object-cover">
+    <div class="p-5">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold highlight-gold">McLaren 570S</h2>
+        <span class="text-white font-semibold text-lg">$195,000</span>
+      </div>
+      <div class="grid grid-cols-2 gap-4 text-sm">
+        <div class="flex items-center gap-2"><i class="ph ph-engine highlight-gold"></i> 562 HP</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gauge highlight-gold"></i> 0-60 in 3.1s</div>
+        <div class="flex items-center gap-2"><i class="ph ph-gear-six highlight-gold"></i> 7-Speed DCT</div>
+        <div class="flex items-center gap-2"><i class="ph ph-car highlight-gold"></i> RWD</div>
+      </div>
+    </div>
+  </a>
+
+
+</div>
+
+<!-- Search Functionality -->
+<script>
+  function searchCars() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+    const links = document.querySelectorAll('.grid > a');
+    let foundCars = 0;
+
+    links.forEach(link => {
+      const carTitle = link.querySelector('h2').textContent.toLowerCase();
+      if (searchTerm === '' || carTitle.includes(searchTerm)) {
+        link.style.display = 'block';
+        foundCars++;
+      } else {
+        link.style.display = 'none';
+      }
+    });
+
+    // Show message if no cars found
+    const existingMessage = document.getElementById('noResultsMessage');
+    if (existingMessage) {
+      existingMessage.remove();
+    }
+    if (foundCars === 0 && searchTerm !== '') {
+      const message = document.createElement('div');
+      message.id = 'noResultsMessage';
+      message.className = 'col-span-full text-center highlight-gold text-xl font-semibold py-8';
+      message.textContent = 'No Results Found';
+      document.querySelector('.grid').appendChild(message);
+    }
+  }
+
+  // Allow search on Enter key press
+  document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      searchCars();
+    }
+  });
+
+  // Real-time search as user types
+  document.getElementById('searchInput').addEventListener('input', function() {
+    searchCars();
+  });
+</script>
 </body>
 </html>

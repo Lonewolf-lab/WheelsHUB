@@ -14,13 +14,42 @@
     }
   </style>
 </head>
-<body class="text-white p-6">
+<body class="text-white p-6 pt-32">
+
+  <!-- Header -->
+  <header class="bg-[#0a0a0a] p-4 flex flex-col md:flex-row justify-between items-center shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="flex items-center gap-4 mb-4 md:mb-0">
+      <img src="../photos/wheelshub logo no bg.png" alt="WheelsHub Logo" class="h-12">
+      <span class="text-3xl font-bold text-[#FFD700]">WheelsHub</span>
+    </div>
+    <nav class="flex items-center space-x-6 text-lg">
+      <ul class="flex space-x-6">
+        <li><a href="../site.html" class="text-gray-300 hover:text-[#FFD700] transition">Home</a></li>
+        <li><a href="../brands.html" class="text-gray-300 hover:text-[#FFD700] transition">Brands</a></li>
+        <li><a href="../Test_drive.html" class="text-gray-300 hover:text-[#FFD700] transition">Test Drive</a></li>
+        <li><a href="../about.html" class="text-gray-300 hover:text-[#FFD700] transition">About Us</a></li>
+      </ul>
+      <!-- Search Bar -->
+      <div class="relative">
+        <input
+                type="search"
+                id="searchInput"
+                placeholder="Search Ferrari cars..."
+                class="bg-[#1a1a1a] text-white rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-[#FFD700] w-48 md:w-64"
+        />
+        <button onclick="searchCars()" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#FFD700]">
+          <i class="ph ph-magnifying-glass text-xl"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
 
   <h1 class="text-3xl font-bold text-[#FFD700] mb-10 text-center">Ferrari Collection</h1>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
     <!-- Car 1: Ferrari 812 -->
+    <a href="812.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Ferraris/812.jpg" alt="Ferrari 812" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -36,8 +65,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 2: Ferrari SF90 Stradale -->
+    <a href="sf90.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Ferraris/sf90 stradale.jpeg" alt="Ferrari SF90 Stradale" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -53,8 +84,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 3: Ferrari F8 Tributo -->
+    <a href="f8.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Ferraris/f8 tributo.webp" alt="Ferrari F8 Tributo" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -70,8 +103,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 4: Ferrari Roma -->
+    <a href="roma.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Ferraris/roma.jpg" alt="Ferrari Roma" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -87,8 +122,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 5: Ferrari 296 GT -->
+    <a href="296gt.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Ferraris/812.jpg" alt="Ferrari 296 GT" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -104,8 +141,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 6: Ferrari Purosangue -->
+    <a href="purosangue.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Ferraris/sf90 stradale.jpeg" alt="Ferrari Purosangue" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -121,25 +160,10 @@
         </div>
       </div>
     </div>
-
-    <!-- Car 7: Ferrari 12Cilindri -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="Ferraris/f8 tributo.webp" alt="Ferrari 12Cilindri" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between items-center mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">Ferrari 12Cilindri</h2>
-          <span class="text-white font-semibold text-lg">$2,000,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm text-white">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 830 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.8s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 8-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
+    </a>
 
     <!-- Car 8: Ferrari Daytona -->
+    <a href="daytona.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Ferraris/roma.jpg" alt="Ferrari Daytona" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -155,93 +179,10 @@
         </div>
       </div>
     </div>
-
-    <!-- Car 9: Ferrari Monza -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="Ferraris/812.jpg" alt="Ferrari Monza" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between items-center mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">Ferrari Monza</h2>
-          <span class="text-white font-semibold text-lg">$1,800,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm text-white">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 799 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.9s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Car 10: Ferrari F80 -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="Ferraris/sf90 stradale.jpeg" alt="Ferrari F80" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between items-center mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">Ferrari F80</h2>
-          <span class="text-white font-semibold text-lg">$3,000,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm text-white">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 800 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 2.8s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 7-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Car 11: Ferrari F50 -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="Ferraris/f8 tributo.webp" alt="Ferrari F50" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between items-center mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">Ferrari F50</h2>
-          <span class="text-white font-semibold text-lg">$2,500,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm text-white">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 513 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 3.8s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 6-Speed Manual</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Car 12: Ferrari F40 -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="Ferraris/roma.jpg" alt="Ferrari F40" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between items-center mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">Ferrari F40</h2>
-          <span class="text-white font-semibold text-lg">$2,000,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm text-white">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 471 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 4.1s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 5-Speed Manual</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Car 13: Ferrari GTO -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="Ferraris/812.jpg" alt="Ferrari GTO" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between items-center mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">Ferrari GTO</h2>
-          <span class="text-white font-semibold text-lg">$70,000,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm text-white">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 400 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 4.8s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 5-Speed Manual</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
+    </a>
 
     <!-- Car 14: Ferrari LaFerrari -->
+    <a href="laferrrari.html" class="block hover:opacity-90 transition-opacity">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Ferraris/sf90 stradale.jpeg" alt="Ferrari LaFerrari" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -257,24 +198,55 @@
         </div>
       </div>
     </div>
-
-    <!-- Car 15: Ferrari Enzo Ferrari -->
-    <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="Ferraris/f8 tributo.webp" alt="Ferrari Enzo Ferrari" class="w-full h-64 object-cover">
-      <div class="p-5">
-        <div class="flex justify-between items-center mb-3">
-          <h2 class="text-xl font-bold text-[#FFD700]">Ferrari Enzo Ferrari</h2>
-          <span class="text-white font-semibold text-lg">$3,000,000</span>
-        </div>
-        <div class="grid grid-cols-2 gap-4 text-sm text-white">
-          <div class="flex items-center gap-2"><i class="ph ph-engine"></i> 651 HP</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gauge"></i> 0-60 in 3.1s</div>
-          <div class="flex items-center gap-2"><i class="ph ph-gear-six"></i> 6-Speed Auto</div>
-          <div class="flex items-center gap-2"><i class="ph ph-car"></i> RWD</div>
-        </div>
-      </div>
-    </div>
+    </a>
 
   </div>
+
+  <!-- Search Functionality -->
+  <script>
+    function searchCars() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+      const carCards = document.querySelectorAll('.grid > div');
+      let foundCars = 0;
+
+      carCards.forEach(card => {
+        const carTitle = card.querySelector('h2').textContent.toLowerCase();
+        
+        // Only show cars that match the search term exactly or contain the search term
+        if (searchTerm === '' || carTitle.includes(searchTerm)) {
+          card.style.display = 'block';
+          foundCars++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Show message if no cars found
+      const existingMessage = document.getElementById('noResultsMessage');
+      if (existingMessage) {
+        existingMessage.remove();
+      }
+
+      if (foundCars === 0 && searchTerm !== '') {
+        const message = document.createElement('div');
+        message.id = 'noResultsMessage';
+        message.className = 'col-span-full text-center text-[#FFD700] text-xl font-semibold py-8';
+        message.textContent = 'No Results Found';
+        document.querySelector('.grid').appendChild(message);
+      }
+    }
+
+    // Allow search on Enter key press
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchCars();
+      }
+    });
+
+    // Real-time search as user types
+    document.getElementById('searchInput').addEventListener('input', function() {
+      searchCars();
+    });
+  </script>
 </body>
 </html>

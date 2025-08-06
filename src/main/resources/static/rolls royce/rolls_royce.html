@@ -14,13 +14,42 @@
     }
   </style>
 </head>
-<body class="text-white p-6">
+<body class="text-white p-6 pt-32">
+
+  <!-- Header -->
+  <header class="bg-[#0a0a0a] p-4 flex flex-col md:flex-row justify-between items-center shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="flex items-center gap-4 mb-4 md:mb-0">
+      <img src="../photos/wheelshub logo no bg.png" alt="WheelsHub Logo" class="h-12">
+      <span class="text-3xl font-bold text-[#FFD700]">WheelsHub</span>
+    </div>
+    <nav class="flex items-center space-x-6 text-lg">
+      <ul class="flex space-x-6">
+        <li><a href="../site.html" class="text-gray-300 hover:text-[#FFD700] transition">Home</a></li>
+        <li><a href="../brands.html" class="text-gray-300 hover:text-[#FFD700] transition">Brands</a></li>
+        <li><a href="../Test_drive.html" class="text-gray-300 hover:text-[#FFD700] transition">Test Drive</a></li>
+        <li><a href="../about.html" class="text-gray-300 hover:text-[#FFD700] transition">About Us</a></li>
+      </ul>
+      <!-- Search Bar -->
+      <div class="relative">
+        <input
+                type="search"
+                id="searchInput"
+                placeholder="Search Rolls Royce cars..."
+                class="bg-[#1a1a1a] text-white rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-[#FFD700] w-48 md:w-64"
+        />
+        <button onclick="searchCars()" type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#FFD700]">
+          <i class="ph ph-magnifying-glass text-xl"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
 
   <h1 class="text-3xl font-bold text-[#FFD700] mb-10 text-center">Rolls-Royce Collection</h1>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
     
     <!-- Car 1 -->
+    <a href="rollsroyce%20ghost.html" class="block">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
       <img src="Rolls Royces/ghost.webp" alt="Rolls-Royce Ghost" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -36,8 +65,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 2 -->
+    <a href="rollsroyce%20phantom.html" class="block">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden  cursor-pointer">
       <img src="Rolls Royces/phantom.webp" alt="Rolls-Royce Phantom" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -53,8 +84,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 3 -->
+    <a href="rollsroyce%20cullian.html" class="block">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden  cursor-pointer">
       <img src="Rolls Royces/cullinan.jpg" alt="Rolls-Royce Cullinan" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -70,8 +103,10 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 4 -->
+    <a href="rollsroyce%20wraith.html" class="block">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden   cursor-pointer">
       <img src="Rolls Royces/wraith.avif" alt="Rolls-Royce Wraith" class="w-full h-64 object-cover">
       <div class="p-5">
@@ -87,10 +122,12 @@
         </div>
       </div>
     </div>
+    </a>
 
     <!-- Car 5 -->
+    <a href="rollsroyce%20spectre.html" class="block">
     <div class="bg-[#000000] rounded-lg shadow-md overflow-hidden cursor-pointer">
-      <img src="Rolls Royces/ghost.avif" alt="Rolls-Royce Spectre" class="w-full h-64 object-cover">
+      <img src="https://stimg.cardekho.com/images/carexteriorimages/630x420/Rolls-Royce/Spectre/11100/1705661590820/front-left-side-47.jpg?imwidth=420&impolicy=resize" alt="Rolls-Royce Spectre" class="w-full h-64 object-cover">
       <div class="p-5">
         <div class="flex justify-between items-center mb-3">
           <h2 class="text-xl font-bold text-[#FFD700]">Rolls-Royce Spectre</h2>
@@ -104,7 +141,55 @@
         </div>
       </div>
     </div>
+    </a>
 
   </div>
+
+  <!-- Search Functionality -->
+  <script>
+    function searchCars() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+      const carCards = document.querySelectorAll('.grid > div');
+      let foundCars = 0;
+
+      carCards.forEach(card => {
+        const carTitle = card.querySelector('h2').textContent.toLowerCase();
+        
+        // Only show cars that match the search term exactly or contain the search term
+        if (searchTerm === '' || carTitle.includes(searchTerm)) {
+          card.style.display = 'block';
+          foundCars++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Show message if no cars found
+      const existingMessage = document.getElementById('noResultsMessage');
+      if (existingMessage) {
+        existingMessage.remove();
+      }
+
+      if (foundCars === 0 && searchTerm !== '') {
+        const message = document.createElement('div');
+        message.id = 'noResultsMessage';
+        message.className = 'col-span-full text-center text-[#FFD700] text-xl font-semibold py-8';
+        message.textContent = 'No Results Found';
+        document.querySelector('.grid').appendChild(message);
+      }
+    }
+
+    // Allow search on Enter key press
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchCars();
+      }
+    });
+
+    // Real-time search as user types
+    document.getElementById('searchInput').addEventListener('input', function() {
+      searchCars();
+    });
+  </script>
 </body>
 </html>
